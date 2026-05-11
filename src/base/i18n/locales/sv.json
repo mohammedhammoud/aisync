@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "primary": "Navigering",
+    "skipToContent": "Hoppa till innehåll",
+    "skills": "Färdigheter",
+    "configs": "Konfigurationer",
+    "instructions": "Instruktioner",
+    "settings": "Inställningar"
+  },
+  "skills": {
+    "title": "Färdigheter",
+    "new": "Ny",
+    "newName": "Ny färdighet",
+    "newTemplate": "# {{name}}\n\n",
+    "name": "Namn",
+    "id": "ID",
+    "description": "Beskrivning",
+    "content": "Innehåll",
+    "enabled": "Aktiv",
+    "save": "Spara",
+    "delete": "Ta bort",
+    "noSkills": "Inga färdigheter hittades. Skapa en ny färdighet för att komma igång.",
+    "notFound": "Färdigheten hittades inte."
+  },
+  "configs": {
+    "title": "Konfigurationer",
+    "listLabel": "Konfigurationer",
+    "selectConfig": "Välj {{name}}",
+    "deleteConfig": "Det här tar permanent bort konfigurationen \"{{name}}\". Synkroniserade filer som redan har skrivits till målmappar tas inte bort automatiskt.",
+    "id": "ID",
+    "name": "Namn",
+    "skillsPath": "Sökväg till färdigheter",
+    "instructionsPath": "Sökväg till instruktioner",
+    "syncBehavior": "Synk skapar alltid symboliska länkar. Befintliga filer eller mappar säkerhetskopieras innan appen ersätter dem, så målen hålls små och ändringar pekar mot den delade källan.",
+    "enabled": "Aktiv",
+    "disabled": "Inaktiv",
+    "new": "Ny",
+    "save": "Spara",
+    "noConfigs": "Inga konfigurationer hittades. Skapa en ny konfiguration för att komma igång.",
+    "notFound": "Konfigurationen hittades inte."
+  },
+  "instructions": {
+    "title": "Instruktioner",
+    "global": "Globala instruktioner",
+    "save": "Spara"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "localRootLabel": "Rotmapp",
+    "language": "Språk",
+    "english": "Engelska",
+    "swedish": "Svenska",
+    "theme": "Tema",
+    "themeSystem": "System",
+    "themeLight": "Ljust",
+    "themeDark": "Mörkt"
+  },
+  "dirty": {
+    "unsaved": "Osparat, spara eller förkasta.",
+    "discard": "Förkasta"
+  },
+  "dialogs": {
+    "deleteConfigHeading": "Vill du ta bort den här konfigurationen?",
+    "deleteSkillHeading": "Vill du ta bort den här färdigheten?",
+    "deleteSkillMessage": "Det här tar permanent bort färdigheten \"{{name}}\". Åtgärden kan inte ångras."
+  },
+  "errors": {
+    "invalid_id_length": "Ogiltig ID-längd.",
+    "invalid_id_format": "Ogiltigt ID. Använd bokstäver, siffror, bindestreck eller understreck.",
+    "path_resolve_root_failed": "Kunde inte läsa appens rotmapp.",
+    "path_resolve_path_failed": "Kunde inte läsa den valda sökvägen.",
+    "path_resolve_parent_failed": "Kunde inte läsa överordnad mapp.",
+    "path_escapes_root": "Sökvägen lämnar appens rotmapp.",
+    "config_not_found": "Konfigurationen hittades inte.",
+    "config_already_exists": "Konfigurationen finns redan.",
+    "skill_not_found": "Färdigheten hittades inte.",
+    "skill_already_exists": "Färdigheten finns redan.",
+    "skill_id_mismatch": "Färdighetens ID matchar inte.",
+    "io": "Kunde inte läsa eller skriva filer.",
+    "json": "Kunde inte tolka sparad data.",
+    "emit": "Kunde inte meddela appen om ändringar.",
+    "unknown": "Något gick fel."
+  },
+  "common": {
+    "delete": "Ta bort",
+    "cancel": "Avbryt",
+    "close": "Stäng",
+    "expand": "Expandera",
+    "collapse": "Fäll ihop",
+    "saved": "Sparat",
+    "deleted": "Borttaget",
+    "discarded": "Förkastat"
+  }
+}

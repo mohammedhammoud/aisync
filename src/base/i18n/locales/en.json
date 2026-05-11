@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "primary": "Navigation",
+    "skipToContent": "Skip to content",
+    "skills": "Skills",
+    "configs": "Configurations",
+    "instructions": "Instructions",
+    "settings": "Settings"
+  },
+  "skills": {
+    "title": "Skills",
+    "new": "New",
+    "newName": "New skill",
+    "newTemplate": "# {{name}}\n\n",
+    "name": "Name",
+    "id": "ID",
+    "description": "Description",
+    "content": "Content",
+    "enabled": "Enabled",
+    "save": "Save",
+    "delete": "Delete",
+    "noSkills": "No skills found. Create a new skill to get started.",
+    "notFound": "Skill not found."
+  },
+  "configs": {
+    "title": "Configurations",
+    "listLabel": "Configurations",
+    "selectConfig": "Select {{name}}",
+    "deleteConfig": "This will permanently remove the configuration \"{{name}}\". Any synchronized files already written to target folders are not removed automatically.",
+    "id": "ID",
+    "name": "Name",
+    "skillsPath": "Path to skills",
+    "instructionsPath": "Path to instructions",
+    "syncBehavior": "Sync always creates symbolic links. Existing files or folders are backed up before the app replaces them, so targets stay small and changes keep pointing at the shared source.",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "new": "New",
+    "save": "Save",
+    "noConfigs": "No configurations found. Create a new configuration to get started.",
+    "notFound": "Configuration not found."
+  },
+  "instructions": {
+    "title": "Instructions",
+    "global": "Global instructions",
+    "save": "Save"
+  },
+  "settings": {
+    "title": "Settings",
+    "localRootLabel": "Root folder",
+    "language": "Language",
+    "english": "English",
+    "swedish": "Svenska",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark"
+  },
+  "dirty": {
+    "unsaved": "Unsaved, save or discard.",
+    "discard": "Discard"
+  },
+  "dialogs": {
+    "deleteConfigHeading": "Remove this configuration?",
+    "deleteSkillHeading": "Remove this skill?",
+    "deleteSkillMessage": "This will permanently delete the skill \"{{name}}\". This action cannot be undone."
+  },
+  "errors": {
+    "invalid_id_length": "Invalid ID length.",
+    "invalid_id_format": "Invalid ID. Use letters, numbers, hyphen, or underscore.",
+    "path_resolve_root_failed": "Could not resolve the app root folder.",
+    "path_resolve_path_failed": "Could not resolve the selected path.",
+    "path_resolve_parent_failed": "Could not resolve the parent folder.",
+    "path_escapes_root": "Path escapes the app root folder.",
+    "config_not_found": "Configuration not found.",
+    "config_already_exists": "Configuration already exists.",
+    "skill_not_found": "Skill not found.",
+    "skill_already_exists": "Skill already exists.",
+    "skill_id_mismatch": "Skill ID mismatch.",
+    "io": "Could not read or write files.",
+    "json": "Could not parse saved data.",
+    "emit": "Could not notify the app about changes.",
+    "unknown": "Something went wrong."
+  },
+  "common": {
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "close": "Close",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "saved": "Saved",
+    "deleted": "Deleted",
+    "discarded": "Discarded"
+  }
+}

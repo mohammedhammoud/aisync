@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    const storedColorScheme = window.localStorage.getItem("app:colorScheme");
+    const colorScheme = ["light", "dark", "system"].includes(storedColorScheme) ? storedColorScheme : "system";
+    const resolvedColorScheme = colorScheme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : colorScheme === "dark" ? "dark" : "light";
+    document.documentElement.classList.toggle("dark", resolvedColorScheme === "dark");
+    document.documentElement.style.colorScheme = resolvedColorScheme;
+  </script>
+  <title>App</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
