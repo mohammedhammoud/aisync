@@ -5,12 +5,13 @@ mod platform;
 use specta_typescript::Typescript;
 use tauri_specta::{collect_commands, Builder, ErrorHandlingMode};
 
+type SpectaBuilder = Builder<tauri::Wry>;
+
 #[cfg(test)]
 mod test_support;
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
-pub fn run() {
-    let builder = Builder::<tauri::Wry>::new()
+pub fn specta_builder() -> SpectaBuilder {
+    Builder::<tauri::Wry>::new()
         .error_handling(ErrorHandlingMode::Throw)
         .commands(collect_commands![
             core::config::get_defaults,
@@ -27,12 +28,21 @@ pub fn run() {
             core::skills::delete_skill,
             core::instructions::read_instructions,
             core::instructions::write_instructions
-        ]);
+        ])
+}
 
-    #[cfg(debug_assertions)]
-    builder
+pub fn export_bindings() {
+    specta_builder()
         .export(Typescript::default(), "../src/base/tauri/bindings.ts")
         .expect("failed to export tauri typescript bindings");
+}
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+pub fn run() {
+    let builder = specta_builder();
+
+    #[cfg(debug_assertions)]
+    export_bindings();
 
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())

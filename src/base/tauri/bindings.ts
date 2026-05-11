@@ -50,24 +50,6 @@ export const commands = {
 };
 
 /* Types */
-export type Defaults = {
-  setupPath: string;
-  newTargetConfig: TargetConfig;
-};
-
-export type Globals = {
-  appName: string;
-  setupPath: string;
-};
-
-export type TargetConfig = {
-  id: string;
-  name: string;
-  skillsPath: string;
-  instructionsPath: string;
-  enabled: boolean;
-};
-
 export type AppError = {
   code: AppErrorCode;
   message: string;
@@ -80,6 +62,16 @@ export type AppErrorCode =
   | SystemErrorCode;
 
 export type ConfigErrorCode = "config_not_found" | "config_already_exists";
+
+export type Defaults = {
+  setupPath: string;
+  newTargetConfig: TargetConfig;
+};
+
+export type Globals = {
+  appName: string;
+  setupPath: string;
+};
 
 export type PathErrorCode =
   | "invalid_id_length"
@@ -109,3 +101,11 @@ export type SkillMetadata = {
 };
 
 export type SystemErrorCode = "io" | "json" | "emit" | "unknown";
+
+export type TargetConfig = {
+  id: string;
+  name: string;
+  skillsPath: string;
+  instructionsPath: string;
+  enabled: boolean;
+};
