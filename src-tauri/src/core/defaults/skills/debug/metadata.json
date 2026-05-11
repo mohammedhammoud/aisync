@@ -1,0 +1,8 @@
+{
+  "id": "debug",
+  "name": "Debug",
+  "description": "Find root cause and propose the smallest safe fix.",
+  "enabled": true,
+  "tags": [],
+  "sourcePath": null
+}

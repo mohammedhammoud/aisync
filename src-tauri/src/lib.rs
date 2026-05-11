@@ -1,0 +1,42 @@
+mod core;
+mod os;
+mod platform;
+
+use specta_typescript::Typescript;
+use tauri_specta::{collect_commands, Builder, ErrorHandlingMode};
+
+#[cfg(test)]
+mod test_support;
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+pub fn run() {
+    let builder = Builder::<tauri::Wry>::new()
+        .error_handling(ErrorHandlingMode::Throw)
+        .commands(collect_commands![
+            core::config::get_defaults,
+            core::config::get_globals,
+            core::config::get_configs,
+            core::skills::get_skills,
+            core::config::get_config,
+            core::config::create_config,
+            core::config::update_config,
+            core::config::delete_config,
+            core::skills::get_skill,
+            core::skills::create_skill,
+            core::skills::update_skill,
+            core::skills::delete_skill,
+            core::instructions::read_instructions,
+            core::instructions::write_instructions
+        ]);
+
+    #[cfg(debug_assertions)]
+    builder
+        .export(Typescript::default(), "../src/base/tauri/bindings.ts")
+        .expect("failed to export tauri typescript bindings");
+
+    tauri::Builder::default()
+        .plugin(tauri_plugin_opener::init())
+        .invoke_handler(builder.invoke_handler())
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
+}
