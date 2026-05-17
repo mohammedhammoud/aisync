@@ -32,7 +32,7 @@ export function GitHubSyncSettings() {
   } = useGithubSyncSettingsState();
   const [openConflict, setOpenConflict] = useState<SyncConflict | null>(null);
 
-  const { expiresInSeconds, openDelaySeconds } =
+  const { expiresInSeconds, openDelaySeconds, openGithubLoginNow } =
     useGithubSyncLoginCodeTimer(openGithubLogin);
 
   const shouldLockUi = isConnecting || isUserInitiatedSync;
@@ -73,7 +73,7 @@ export function GitHubSyncSettings() {
         onCreateRepo={setupGithub}
         onDisconnect={disconnectGithub}
         onLoginCodeCopy={copyGithubLoginCode}
-        onLoginCodeOpen={openGithubLogin}
+        onLoginCodeOpen={openGithubLoginNow}
         onOpenConflict={handleOpenConflict}
         onSync={syncGithub}
       />

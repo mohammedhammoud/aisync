@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useGithubSyncStore } from "@/features/github/store/githubSyncStore";
 
 const MILLISECONDS_PER_SECOND = 1000;
@@ -22,10 +22,23 @@ export function useGithubSyncLoginCodeTimer(onOpenGithubLogin: () => void) {
   );
   const [openDelaySeconds, setOpenDelaySeconds] = useState(0);
   const [expiresInSeconds, setExpiresInSeconds] = useState(0);
+  const openerRef = useRef<number | null>(null);
+
+  const clearAutoOpen = useCallback(() => {
+    if (openerRef.current === null) return;
+    window.clearTimeout(openerRef.current);
+    openerRef.current = null;
+    setOpenDelaySeconds(0);
+  }, []);
+
+  const openGithubLoginNow = useCallback(() => {
+    clearAutoOpen();
+    onOpenGithubLogin();
+  }, [clearAutoOpen, onOpenGithubLogin]);
 
   useEffect(() => {
     if (!login || !isConnecting) {
-      setOpenDelaySeconds(0);
+      clearAutoOpen();
       setExpiresInSeconds(0);
       return;
     }
@@ -41,16 +54,17 @@ export function useGithubSyncLoginCodeTimer(onOpenGithubLogin: () => void) {
       setOpenDelaySeconds((seconds) => Math.max(0, seconds - 1));
       updateExpiresInSeconds();
     }, MILLISECONDS_PER_SECOND);
-    const opener = window.setTimeout(
-      onOpenGithubLogin,
-      GITHUB_LOGIN_AUTO_OPEN_DELAY_SECONDS * MILLISECONDS_PER_SECOND,
-    );
+    openerRef.current = window.setTimeout(() => {
+      openerRef.current = null;
+      setOpenDelaySeconds(0);
+      onOpenGithubLogin();
+    }, GITHUB_LOGIN_AUTO_OPEN_DELAY_SECONDS * MILLISECONDS_PER_SECOND);
 
     return () => {
       window.clearInterval(countdown);
-      window.clearTimeout(opener);
+      clearAutoOpen();
     };
-  }, [isConnecting, login, loginExpiresAtMs, onOpenGithubLogin]);
+  }, [clearAutoOpen, isConnecting, login, loginExpiresAtMs, onOpenGithubLogin]);
 
-  return { expiresInSeconds, openDelaySeconds };
+  return { expiresInSeconds, openDelaySeconds, openGithubLoginNow };
 }
