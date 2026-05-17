@@ -1,0 +1,90 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing release tag to build, for example v0.1.0. Leave empty to run Release Please.'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: release-${{ github.ref_name }}-${{ inputs.tag || 'auto' }}
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    name: Open release PR or tag release
+    runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_dispatch' || inputs.tag == ''
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+
+    steps:
+      - name: Release Please
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  macos-dmg:
+    name: Build macOS DMG
+    runs-on: macos-latest
+    needs: release-please
+    if: always() && (needs.release-please.outputs.release_created == 'true' || inputs.tag != '')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || needs.release-please.outputs.tag_name }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test:unit
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build and upload unsigned DMG
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ inputs.tag || needs.release-please.outputs.tag_name }}
+          releaseName: 'AISync ${{ inputs.tag || needs.release-please.outputs.tag_name }}'
+          releaseBody: 'Unsigned macOS DMG. macOS Gatekeeper may warn on first open.'
+          releaseDraft: false
+          prerelease: false
+          args: --target universal-apple-darwin
