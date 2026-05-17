@@ -77,15 +77,15 @@ export const VARIANT: Record<Variant, VariantType> = {
         readableColor: "text-black dark:text-white",
       },
       hover: {
-        background: "hover:bg-red-200 dark:hover:bg-red-950",
-        readableColor: "hover:text-black dark:text-white",
+        background: "hover:bg-red-200 dark:hover:bg-red-900",
+        readableColor: "hover:text-black dark:hover:text-white",
       },
       active: {
-        background: "active:bg-red-300 dark:active:bg-red-950",
+        background: "active:bg-red-300 dark:active:bg-red-800",
         readableColor: "active:text-black dark:active:text-white",
       },
       selected: {
-        background: "bg-red-300 dark:bg-red-950",
+        background: "bg-red-300 dark:bg-red-900",
         readableColor: "text-black dark:text-white",
       },
       border: "border border-red-300 dark:border-red-700",
@@ -125,15 +125,15 @@ export const VARIANT: Record<Variant, VariantType> = {
         readableColor: "text-black dark:text-white",
       },
       hover: {
-        background: "hover:bg-yellow-200 dark:hover:bg-yellow-950",
-        readableColor: "hover:text-black dark:text-white",
+        background: "hover:bg-yellow-200 dark:hover:bg-yellow-900",
+        readableColor: "hover:text-black dark:hover:text-white",
       },
       active: {
-        background: "active:bg-yellow-300 dark:active:bg-yellow-950",
+        background: "active:bg-yellow-300 dark:active:bg-yellow-800",
         readableColor: "active:text-black dark:active:text-white",
       },
       selected: {
-        background: "bg-yellow-300 dark:bg-yellow-950",
+        background: "bg-yellow-300 dark:bg-yellow-900",
         readableColor: "text-black dark:text-white",
       },
       border: "border border-yellow-300 dark:border-yellow-700",
@@ -173,15 +173,15 @@ export const VARIANT: Record<Variant, VariantType> = {
         readableColor: "text-black dark:text-white",
       },
       hover: {
-        background: "hover:bg-violet-200 dark:hover:bg-violet-950",
-        readableColor: "hover:text-black dark:text-white",
+        background: "hover:bg-violet-200 dark:hover:bg-violet-900",
+        readableColor: "hover:text-black dark:hover:text-white",
       },
       active: {
-        background: "active:bg-violet-300 dark:active:bg-violet-950",
+        background: "active:bg-violet-300 dark:active:bg-violet-800",
         readableColor: "active:text-black dark:active:text-white",
       },
       selected: {
-        background: "bg-violet-300 dark:bg-violet-950",
+        background: "bg-violet-300 dark:bg-violet-900",
         readableColor: "text-black dark:text-white",
       },
       border: "border border-violet-300 dark:border-violet-700",
