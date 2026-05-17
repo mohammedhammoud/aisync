@@ -6,13 +6,16 @@ import { cx } from "@/base/utils/cx";
 import { AppHeader } from "@/base/root/components/AppHeader";
 import { useAppLockContext } from "@/base/root/appLock";
 import { ShellSurface } from "@/base/root/theme/ShellSurface";
+import { useGithubSyncNavigationBadge } from "@/features/github/hooks/useGithubSyncNavigationBadge";
 import { Navigation } from "@/ui/components/Navigation";
+import { AppLogo } from "@/ui/components/AppLogo";
 import { Text } from "@/ui/components/Text";
 import { useTheme } from "@/ui/theme/useTheme";
 
 export function ShellLayout() {
   const { t } = useTranslation();
   const { isLocked, lockMessage } = useAppLockContext();
+  const { githubSyncBadge } = useGithubSyncNavigationBadge();
   const { globalClasses, getVariant } = useTheme();
 
   const v = {
@@ -71,7 +74,7 @@ export function ShellLayout() {
       />
       <aside
         className={cx(
-          "flex flex-col gap-5 border-r px-8 pb-8 pt-16",
+          "flex flex-col gap-4 border-r px-6 pb-6 pt-16",
           globalClasses.sidebarBorder,
           globalClasses.sidebarBackground,
         )}
@@ -96,16 +99,20 @@ export function ShellLayout() {
             to="/instructions"
           />
           <Navigation.Item
+            badge={githubSyncBadge}
             disabled={isLocked}
             icon={Settings}
             label={t("nav.settings")}
             to="/settings"
           />
         </Navigation>
+        <div className="mt-auto flex justify-center pt-4">
+          <AppLogo />
+        </div>
       </aside>
 
       <main
-        className="grid min-w-0 grid-rows-[auto_minmax(0,1fr)] overflow-hidden p-8"
+        className="grid min-w-0 grid-rows-[auto_minmax(0,1fr)] overflow-hidden p-6"
         id="main-content"
       >
         <AppHeader lockMessage={lockMessage} title={title} />

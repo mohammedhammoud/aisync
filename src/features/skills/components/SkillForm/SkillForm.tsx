@@ -40,7 +40,7 @@ export function SkillForm({
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         <FormField label={t("skills.id")}>
           <TextInput
             spellCheck={false}
