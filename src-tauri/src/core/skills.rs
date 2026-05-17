@@ -6,15 +6,18 @@ use tauri::{AppHandle, Emitter};
 use crate::core::config::{read_config, skills_dir, write_config, SkillMetadata};
 use crate::core::errors::{AppError, AppResult};
 use crate::core::events::SKILLS_CHANGED;
+use crate::core::github::events::request_auto_sync;
 use crate::core::path_safety::{app_root, assert_child, validate_id};
 use crate::core::sync;
 
 #[derive(Clone, Debug, Deserialize, Serialize, Type, PartialEq, Eq)]
-#[serde(rename_all = "snake_case")]
 pub enum SkillErrorCode {
-    SkillNotFound,
-    SkillAlreadyExists,
-    SkillIdMismatch,
+    #[serde(rename = "skill_not_found")]
+    NotFound,
+    #[serde(rename = "skill_already_exists")]
+    AlreadyExists,
+    #[serde(rename = "skill_id_mismatch")]
+    IdMismatch,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, Type, PartialEq, Eq)]
@@ -132,7 +135,7 @@ pub fn write_skill_content(
     validate_id(&skill_id)?;
     if skill_id != metadata.id {
         return Err(AppError::new(
-            SkillErrorCode::SkillIdMismatch,
+            SkillErrorCode::IdMismatch,
             "Skill ID mismatch",
         ));
     }
@@ -206,19 +209,20 @@ pub fn create_skill(
     validate_id(&skill_id)?;
     if skill_id != metadata.id {
         return Err(AppError::new(
-            SkillErrorCode::SkillIdMismatch,
+            SkillErrorCode::IdMismatch,
             "Skill ID mismatch",
         ));
     }
     if skill_dir_exists(&skill_id) {
         return Err(AppError::new(
-            SkillErrorCode::SkillAlreadyExists,
+            SkillErrorCode::AlreadyExists,
             "Skill already exists",
         ));
     }
     let content = compose_skill_content(&body, &metadata, &frontmatter_lines)?;
     write_skill_content(skill_id, content, metadata)?;
     let _ = sync::run_sync();
+    let _ = request_auto_sync();
     emit_skills_changed(&app)
 }
 
@@ -234,14 +238,11 @@ pub fn update_skill(
     validate_id(&skill_id)?;
     validate_id(&metadata.id)?;
     if !skill_dir_exists(&skill_id) {
-        return Err(AppError::new(
-            SkillErrorCode::SkillNotFound,
-            "Skill not found",
-        ));
+        return Err(AppError::new(SkillErrorCode::NotFound, "Skill not found"));
     }
     if skill_id != metadata.id && skill_dir_exists(&metadata.id) {
         return Err(AppError::new(
-            SkillErrorCode::SkillAlreadyExists,
+            SkillErrorCode::AlreadyExists,
             "Skill already exists",
         ));
     }
@@ -254,6 +255,7 @@ pub fn update_skill(
     }
 
     let _ = sync::run_sync();
+    let _ = request_auto_sync();
     emit_skills_changed(&app)
 }
 
@@ -262,5 +264,75 @@ pub fn update_skill(
 pub fn delete_skill(app: AppHandle, skill_id: String) -> AppResult<()> {
     delete_skill_record(skill_id)?;
     let _ = sync::run_sync();
+    let _ = request_auto_sync();
     emit_skills_changed(&app)
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::core::config::SkillMetadata;
+    use crate::core::skills::{compose_skill_content, parse_skill_content};
+
+    fn metadata(description: &str) -> SkillMetadata {
+        SkillMetadata {
+            id: "test-skill".to_string(),
+            name: "Test Skill".to_string(),
+            description: description.to_string(),
+            enabled: true,
+            tags: Vec::new(),
+        }
+    }
+
+    #[test]
+    fn parse_content_without_frontmatter() {
+        let parsed = parse_skill_content("# Body\nText");
+
+        assert_eq!(parsed.body, "# Body\nText");
+        assert!(parsed.frontmatter_lines.is_empty());
+    }
+
+    #[test]
+    fn parse_content_with_frontmatter() {
+        let parsed = parse_skill_content("---\nname: audit\ndescription: Test\n---\n# Body");
+
+        assert_eq!(parsed.body, "# Body");
+        assert_eq!(
+            parsed.frontmatter_lines,
+            vec!["name: audit", "description: Test"]
+        );
+    }
+
+    #[test]
+    fn parse_content_with_extra_blank_line_after_delimiter() {
+        let parsed = parse_skill_content("---\nname: audit\n---\n\n# Body");
+
+        assert_eq!(parsed.body, "# Body");
+        assert_eq!(parsed.frontmatter_lines, vec!["name: audit"]);
+    }
+
+    #[test]
+    fn compose_filters_name_and_description_frontmatter() {
+        let content = compose_skill_content(
+            "# Body",
+            &metadata("New description"),
+            &[
+                "name: old".to_string(),
+                "description: old".to_string(),
+                "tags: [safe]".to_string(),
+            ],
+        )
+        .unwrap();
+
+        assert_eq!(
+            content,
+            "---\nname: test-skill\ndescription: \"New description\"\ntags: [safe]\n---\n\n# Body"
+        );
+    }
+
+    #[test]
+    fn compose_escapes_description() {
+        let content = compose_skill_content("Body", &metadata("A \"quoted\" value"), &[]).unwrap();
+
+        assert!(content.contains("description: \"A \\\"quoted\\\" value\""));
+    }
 }

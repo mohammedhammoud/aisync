@@ -1,0 +1,20 @@
+use crate::core::constants::APP_NAME;
+
+pub const CONFLICTS_DIR: &str = ".aisync-conflicts";
+pub const DEFAULT_REPO_NAME: &str = "aisync-config";
+pub const GITHUB_ACCEPT_HEADER: &str = "application/vnd.github+json";
+pub const GITHUB_CLIENT_ID: &str = "Ov23lih8Urv6yEuyZpBq";
+pub const GITHUB_API_BASE_URL: &str = "https://api.github.com";
+pub const GITHUB_API_VERSION: &str = "2022-11-28";
+pub const GITHUB_DEVICE_CODE_URL: &str = "https://github.com/login/device/code";
+pub const GITHUB_ACCESS_TOKEN_URL: &str = "https://github.com/login/oauth/access_token";
+pub const GITHUB_OAUTH_GRANT_TYPE: &str = "urn:ietf:params:oauth:grant-type:device_code";
+pub const GITHUB_OAUTH_SCOPE: &str = "repo";
+pub const KEYCHAIN_SERVICE: &str = APP_NAME;
+pub const KEYCHAIN_USER: &str = "github-token";
+pub const MANIFEST_FILE: &str = "manifest.json";
+pub const MANIFEST_SCHEMA_VERSION: u8 = 1;
+pub const REMOTE_ROOT: &str = ".aisync";
+pub const SKILL_FILE: &str = "SKILL.md";
+pub const SKILL_METADATA_FILE: &str = "metadata.json";
+pub const USER_AGENT: &str = APP_NAME;

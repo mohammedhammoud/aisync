@@ -2,6 +2,7 @@ use std::fs;
 
 use crate::core::config::instructions_path;
 use crate::core::errors::{AppError, AppResult};
+use crate::core::github::events::request_auto_sync;
 use crate::core::sync;
 
 #[tauri::command]
@@ -23,5 +24,6 @@ pub fn write_instructions(content: String) -> AppResult<()> {
     }
     fs::write(path, content).map_err(AppError::io)?;
     let _ = sync::run_sync();
+    let _ = request_auto_sync();
     Ok(())
 }

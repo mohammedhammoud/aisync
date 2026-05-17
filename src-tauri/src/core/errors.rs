@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use specta::Type;
 
 use crate::core::config::ConfigErrorCode;
+use crate::core::github::types::GithubErrorCode;
 use crate::core::path_safety::PathErrorCode;
 use crate::core::skills::SkillErrorCode;
 
@@ -20,6 +21,7 @@ pub enum AppErrorCode {
     Path(PathErrorCode),
     Config(ConfigErrorCode),
     Skill(SkillErrorCode),
+    Github(GithubErrorCode),
     System(SystemErrorCode),
 }
 
@@ -72,6 +74,12 @@ impl From<ConfigErrorCode> for AppErrorCode {
 impl From<SkillErrorCode> for AppErrorCode {
     fn from(code: SkillErrorCode) -> Self {
         Self::Skill(code)
+    }
+}
+
+impl From<GithubErrorCode> for AppErrorCode {
+    fn from(code: GithubErrorCode) -> Self {
+        Self::Github(code)
     }
 }
 

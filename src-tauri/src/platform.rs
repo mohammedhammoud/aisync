@@ -26,6 +26,10 @@ pub trait PlatformAdapter {
         PathBuf::from(input)
     }
 
+    fn local_settings_dir(&self) -> PathBuf {
+        self.app_root().join("settings")
+    }
+
     fn default_new_target_config(&self) -> TargetConfig;
     fn default_target_configs(&self) -> Vec<TargetConfig>;
     fn symlink_path(&self, source: &Path, target: &Path) -> Result<(), String>;

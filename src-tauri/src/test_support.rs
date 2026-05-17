@@ -57,16 +57,6 @@ pub(crate) fn set_home(path: &Path) {
     std::env::set_var(HOME_ENV, path);
 }
 
-pub(crate) fn metadata(id: &str, name: &str) -> SkillMetadata {
-    SkillMetadata {
-        id: id.to_string(),
-        name: name.to_string(),
-        description: String::new(),
-        enabled: true,
-        tags: Vec::new(),
-    }
-}
-
 pub(crate) fn target_config(root: &Path) -> TargetConfig {
     TargetConfig {
         id: "test".into(),

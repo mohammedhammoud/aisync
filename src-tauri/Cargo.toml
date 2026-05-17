@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Local desktop utility for AI provider, skill, instruction, and sync management"
 authors = ["AISync"]
 edition = "2021"
+default-run = "aisync"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -22,6 +23,11 @@ tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+base64 = "0.22"
+chrono = { version = "0.4", features = ["serde"] }
+keyring = "3"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+uuid = { version = "1", features = ["v4", "serde"] }
 specta = { version = "2.0.0-rc.25", features = ["derive"] }
 tauri-specta = { version = "2.0.0-rc.25", features = ["javascript", "typescript"] }
 specta-typescript = "0.0.12"
