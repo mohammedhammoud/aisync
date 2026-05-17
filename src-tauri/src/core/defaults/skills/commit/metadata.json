@@ -3,6 +3,5 @@
   "name": "Commit",
   "description": "Generate a Conventional Commit from staged changes.",
   "enabled": true,
-  "tags": [],
-  "sourcePath": null
+  "tags": []
 }

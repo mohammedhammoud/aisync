@@ -16,7 +16,6 @@ const skills = [
     description: "Review changed code",
     enabled: true,
     tags: [],
-    sourcePath: null,
   },
   {
     id: "debug",
@@ -24,7 +23,6 @@ const skills = [
     description: "Find root cause",
     enabled: true,
     tags: [],
-    sourcePath: null,
   },
   {
     id: "test",
@@ -32,7 +30,6 @@ const skills = [
     description: "Run tests",
     enabled: true,
     tags: [],
-    sourcePath: null,
   },
   {
     id: "document",
@@ -40,7 +37,6 @@ const skills = [
     description: "Generate documentation",
     enabled: true,
     tags: [],
-    sourcePath: null,
   },
   {
     id: "refactor",
@@ -48,7 +44,6 @@ const skills = [
     description: "Improve code structure",
     enabled: true,
     tags: [],
-    sourcePath: null,
   },
   {
     id: "optimize",
@@ -56,7 +51,6 @@ const skills = [
     description: "Enhance performance",
     enabled: true,
     tags: [],
-    sourcePath: null,
   },
 ];
 

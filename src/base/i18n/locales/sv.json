@@ -31,7 +31,7 @@
     "name": "Namn",
     "skillsPath": "Sökväg till färdigheter",
     "instructionsPath": "Sökväg till instruktioner",
-    "syncBehavior": "Synk skapar alltid symboliska länkar. Befintliga filer eller mappar säkerhetskopieras innan appen ersätter dem, så målen hålls små och ändringar pekar mot den delade källan.",
+    "syncBehavior": "Synk skapar symboliska länkar. För att skydda lokalt arbete vägrar AISync ersätta filer eller mappar som appen inte själv skapade. Flytta eller ta bort befintliga mål innan synk.",
     "enabled": "Aktiv",
     "new": "Ny",
     "save": "Spara",
