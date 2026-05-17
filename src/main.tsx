@@ -2,12 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "@/App";
 import { initConfigsStore } from "@/base/store/configsStore";
+import { initI18n } from "@/base/i18n/client";
 import { initGlobalsStore } from "@/base/store/globalsStore";
 import { initSkillsStore } from "@/base/store/skillsStore";
 import { ThemeProvider } from "@/ui/theme/ThemeProvider";
 import "../tailwind.css";
-import "@/i18n";
 
+void initI18n();
 void initConfigsStore();
 void initSkillsStore();
 void initGlobalsStore();
