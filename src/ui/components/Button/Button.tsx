@@ -22,7 +22,7 @@ const sizeClassNames: Record<ButtonSize, string> = {
 
 const iconOnlySizeClassNames: Record<ButtonSize, string> = {
   md: "h-9 w-9",
-  sm: "h-6 w-6",
+  sm: "h-8 w-8",
 };
 
 export function Button({
@@ -45,6 +45,8 @@ export function Button({
       className={cx(
         "inline-flex items-center justify-center gap-2 rounded",
         v.focus,
+        "focus-visible:ring-2",
+        globalClasses.focusRing,
         "cursor-pointer disabled:cursor-not-allowed font-semibold",
         globalClasses.disabledOpacity,
         v.base.background,

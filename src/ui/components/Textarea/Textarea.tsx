@@ -101,6 +101,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       v.outline.base.background,
       v.outline.base.readableColor,
       v.outline.focus,
+      "focus-visible:ring-2",
+      globalClasses.focusRing,
       expanded ? "h-full min-h-full" : className,
     );
 
@@ -123,14 +125,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           />
           <Button
             aria-label={expanded ? t("common.collapse") : t("common.expand")}
-            className={cx("absolute right-2 top-2", expanded && "h-7 w-7")}
+            className="absolute right-2 top-2"
             iconOnly
             mode="outline"
             onClick={toggleExpanded}
             size="sm"
             variant="neutral"
           >
-            {expanded ? <Minimize2 size={16} /> : <Maximize2 size={14} />}
+            {expanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
           </Button>
         </div>
       </>

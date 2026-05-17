@@ -20,6 +20,8 @@ export const TextInput = forwardRef<
         fieldVariant.base.background,
         fieldVariant.base.readableColor,
         fieldVariant.focus,
+        "focus-visible:ring-2",
+        globalClasses.focusRing,
         readOnly && "cursor-not-allowed",
         "disabled:cursor-not-allowed",
         globalClasses.disabledOpacity,

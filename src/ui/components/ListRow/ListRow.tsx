@@ -28,9 +28,11 @@ export function ListRow({
       aria-disabled={disabled || undefined}
       data-selected={selected || undefined}
       className={cx(
-        "grid w-full gap-1 rounded bg-transparent p-2.5 text-left",
+        "grid w-full gap-1 rounded bg-transparent p-3 text-left",
         v.neutral.outline.base.readableColor,
         v.neutral.outline.focus,
+        "focus-visible:ring-2",
+        globalClasses.focusRing,
         disabled
           ? ["cursor-not-allowed", globalClasses.disabledOpacityStatic]
           : "cursor-pointer",
@@ -49,7 +51,7 @@ export function ListRow({
     >
       <strong className="text-inherit">{title}</strong>
       {description ? (
-        <span className="text-inherit text-xs opacity-80">{description}</span>
+        <span className="text-inherit text-xs">{description}</span>
       ) : null}
     </div>
   );
