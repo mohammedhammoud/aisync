@@ -5,6 +5,39 @@ use crate::core::path_safety::validate_id;
 use super::constants::{REMOTE_ROOT, SKILL_FILE, SKILL_METADATA_FILE};
 use super::types::GithubErrorCode;
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum SyncPath {
+    Instructions,
+    SkillFile { skill_id: String, file_name: String },
+}
+
+impl SyncPath {
+    pub fn parse(path: &str) -> AppResult<Self> {
+        if path == INSTRUCTIONS_FILE {
+            return Ok(Self::Instructions);
+        }
+
+        let Some(rest) = path.strip_prefix(&format!("{SKILLS_DIR}/")) else {
+            return Err(invalid_remote_path(path));
+        };
+        let Some((skill_id, file_name)) = rest.split_once('/') else {
+            return Err(invalid_remote_path(path));
+        };
+        if rest.contains("../") || skill_id.contains('/') || skill_id == "." || skill_id == ".." {
+            return Err(invalid_remote_path(path));
+        }
+        validate_id(skill_id).map_err(|_error| invalid_remote_path(path))?;
+        if !matches!(file_name, SKILL_FILE | SKILL_METADATA_FILE) {
+            return Err(invalid_remote_path(path));
+        }
+
+        Ok(Self::SkillFile {
+            skill_id: skill_id.to_string(),
+            file_name: file_name.to_string(),
+        })
+    }
+}
+
 pub fn remote_path(local_path: &str) -> String {
     format!("{REMOTE_ROOT}/{local_path}")
 }
@@ -17,25 +50,7 @@ pub fn invalid_remote_path(path: &str) -> AppError {
 }
 
 pub fn validate_sync_path(path: &str) -> AppResult<()> {
-    if path == INSTRUCTIONS_FILE {
-        return Ok(());
-    }
-
-    let Some(rest) = path.strip_prefix(&format!("{SKILLS_DIR}/")) else {
-        return Err(invalid_remote_path(path));
-    };
-    let Some((skill_id, file_name)) = rest.split_once('/') else {
-        return Err(invalid_remote_path(path));
-    };
-    if rest.contains("../") || skill_id.contains('/') || skill_id == "." || skill_id == ".." {
-        return Err(invalid_remote_path(path));
-    }
-    validate_id(skill_id)?;
-    if matches!(file_name, SKILL_FILE | SKILL_METADATA_FILE) {
-        Ok(())
-    } else {
-        Err(invalid_remote_path(path))
-    }
+    SyncPath::parse(path).map(|_| ())
 }
 
 #[cfg(test)]

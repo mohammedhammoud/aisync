@@ -1,3 +1,6 @@
+#[cfg(not(target_os = "macos"))]
+compile_error!("AISync currently supports macOS only. Linux/Windows platform stubs are kept for future support.");
+
 mod core;
 mod os;
 mod platform;
@@ -14,23 +17,23 @@ pub fn specta_builder() -> SpectaBuilder {
     Builder::<tauri::Wry>::new()
         .error_handling(ErrorHandlingMode::Throw)
         .commands(collect_commands![
-            core::config::get_defaults,
-            core::config::get_globals,
-            core::config::get_configs,
-            core::skills::get_skills,
-            core::config::get_config,
-            core::config::create_config,
-            core::config::update_config,
-            core::config::delete_config,
-            core::skills::get_skill,
-            core::skills::create_skill,
-            core::skills::update_skill,
-            core::skills::delete_skill,
+            core::config::commands::get_defaults,
+            core::config::commands::get_globals,
+            core::config::commands::get_configs,
+            core::skills::commands::get_skills,
+            core::config::commands::get_config,
+            core::config::commands::create_config,
+            core::config::commands::update_config,
+            core::config::commands::delete_config,
+            core::skills::commands::get_skill,
+            core::skills::commands::create_skill,
+            core::skills::commands::update_skill,
+            core::skills::commands::delete_skill,
             core::instructions::read_instructions,
             core::instructions::write_instructions,
-            core::github::auth::start_github_login,
-            core::github::auth::logout_github,
-            core::github::auth::get_github_sync_status,
+            core::github::auth::commands::start_github_login,
+            core::github::auth::commands::logout_github,
+            core::github::auth::commands::get_github_sync_status,
             core::github::commands::setup_github_sync,
             core::github::commands::resolve_sync_conflict,
             core::github::commands::sync_github_now
@@ -48,7 +51,9 @@ pub fn run() {
     let builder = specta_builder();
 
     #[cfg(debug_assertions)]
-    export_bindings();
+    if std::env::var_os("AISYNC_EXPORT_BINDINGS_ON_STARTUP").is_some() {
+        export_bindings();
+    }
 
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())

@@ -9,6 +9,9 @@ pub const GITHUB_API_VERSION: &str = "2022-11-28";
 pub const GITHUB_DEVICE_CODE_URL: &str = "https://github.com/login/device/code";
 pub const GITHUB_ACCESS_TOKEN_URL: &str = "https://github.com/login/oauth/access_token";
 pub const GITHUB_OAUTH_GRANT_TYPE: &str = "urn:ietf:params:oauth:grant-type:device_code";
+// GitHub's device OAuth flow needs `repo` for this OAuth app to create and update
+// a private repository. A GitHub App/fine-grained token flow would be narrower but
+// would require a different auth model.
 pub const GITHUB_OAUTH_SCOPE: &str = "repo";
 pub const KEYCHAIN_SERVICE: &str = APP_NAME;
 pub const KEYCHAIN_USER: &str = "github-token";

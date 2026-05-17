@@ -42,16 +42,16 @@ impl AppError {
         }
     }
 
-    pub fn io(error: std::io::Error) -> Self {
-        Self::new(SystemErrorCode::Io, error.to_string())
+    pub fn io(_error: std::io::Error) -> Self {
+        Self::new(SystemErrorCode::Io, "Filesystem operation failed")
     }
 
-    pub fn json(error: serde_json::Error) -> Self {
-        Self::new(SystemErrorCode::Json, error.to_string())
+    pub fn json(_error: serde_json::Error) -> Self {
+        Self::new(SystemErrorCode::Json, "Data file is invalid")
     }
 
-    pub fn emit(error: tauri::Error) -> Self {
-        Self::new(SystemErrorCode::Emit, error.to_string())
+    pub fn emit(_error: tauri::Error) -> Self {
+        Self::new(SystemErrorCode::Emit, "App event delivery failed")
     }
 
     pub fn unknown(message: impl Into<String>) -> Self {

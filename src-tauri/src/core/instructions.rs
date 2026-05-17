@@ -2,6 +2,7 @@ use std::fs;
 
 use crate::core::config::instructions_path;
 use crate::core::errors::{AppError, AppResult};
+use crate::core::fs_utils::write_atomic;
 use crate::core::github::events::request_auto_sync;
 use crate::core::sync;
 
@@ -18,11 +19,14 @@ pub fn read_instructions() -> AppResult<String> {
 #[tauri::command]
 #[specta::specta]
 pub fn write_instructions(content: String) -> AppResult<()> {
-    let path = instructions_path();
-    if let Some(parent) = path.parent() {
-        fs::create_dir_all(parent).map_err(AppError::io)?;
+    const MAX_INSTRUCTIONS_BYTES: usize = 1_000_000;
+    if content.len() > MAX_INSTRUCTIONS_BYTES {
+        return Err(AppError::unknown(format!(
+            "Instructions are too large; maximum is {MAX_INSTRUCTIONS_BYTES} bytes"
+        )));
     }
-    fs::write(path, content).map_err(AppError::io)?;
+    let path = instructions_path();
+    write_atomic(&path, content)?;
     let _ = sync::run_sync();
     let _ = request_auto_sync();
     Ok(())
