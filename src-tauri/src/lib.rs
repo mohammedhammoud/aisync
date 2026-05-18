@@ -27,7 +27,13 @@ pub fn specta_builder() -> SpectaBuilder {
             core::skills::update_skill,
             core::skills::delete_skill,
             core::instructions::read_instructions,
-            core::instructions::write_instructions
+            core::instructions::write_instructions,
+            core::github::auth::start_github_login,
+            core::github::auth::logout_github,
+            core::github::auth::get_github_sync_status,
+            core::github::commands::setup_github_sync,
+            core::github::commands::resolve_sync_conflict,
+            core::github::commands::sync_github_now
         ])
 }
 
@@ -46,6 +52,10 @@ pub fn run() {
 
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
+        .setup(|app| {
+            core::github::events::init(app.handle().clone());
+            Ok(())
+        })
         .invoke_handler(builder.invoke_handler())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

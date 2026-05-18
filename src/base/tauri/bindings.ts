@@ -47,6 +47,15 @@ export const commands = {
   readInstructions: () => __TAURI_INVOKE<string>("read_instructions"),
   writeInstructions: (content: string) =>
     __TAURI_INVOKE<null>("write_instructions", { content }),
+  startGithubLogin: () =>
+    __TAURI_INVOKE<GithubLoginStart>("start_github_login"),
+  logoutGithub: () => __TAURI_INVOKE<null>("logout_github"),
+  getGithubSyncStatus: () =>
+    __TAURI_INVOKE<GithubSyncStatus>("get_github_sync_status"),
+  setupGithubSync: () => __TAURI_INVOKE<GithubSyncStatus>("setup_github_sync"),
+  resolveSyncConflict: (path: string, resolution: SyncConflictResolution) =>
+    __TAURI_INVOKE<null>("resolve_sync_conflict", { path, resolution }),
+  syncGithubNow: () => __TAURI_INVOKE<SyncResult>("sync_github_now"),
 };
 
 /* Types */
@@ -59,6 +68,7 @@ export type AppErrorCode =
   | PathErrorCode
   | ConfigErrorCode
   | SkillErrorCode
+  | GithubErrorCode
   | SystemErrorCode;
 
 export type ConfigErrorCode = "config_not_found" | "config_already_exists";
@@ -66,6 +76,32 @@ export type ConfigErrorCode = "config_not_found" | "config_already_exists";
 export type Defaults = {
   setupPath: string;
   newTargetConfig: TargetConfig;
+};
+
+export type GithubErrorCode =
+  | "auth_failed"
+  | "keychain_failed"
+  | "network"
+  | "not_connected"
+  | "remote_path_invalid";
+
+export type GithubLoginStart = {
+  deviceCode: string;
+  userCode: string;
+  verificationUri: string;
+  expiresIn: number;
+  interval: number;
+};
+
+export type GithubSyncStatus = {
+  connected: boolean;
+  repoOwner: string | null;
+  repoName: string | null;
+  defaultBranch: string | null;
+  lastSyncedCommitSha: string | null;
+  lastSyncedAt: string | null;
+  hasToken: boolean;
+  hasLocalChanges: boolean;
 };
 
 export type Globals = {
@@ -99,6 +135,27 @@ export type SkillMetadata = {
   enabled: boolean;
   tags: string[];
 };
+
+export type SyncConflict = {
+  path: string;
+  message: string;
+  localContent: string | null;
+  remoteContent: string | null;
+};
+
+export type SyncConflictResolution = "local" | "remote";
+
+export type SyncResult = {
+  status: SyncState;
+  conflicts: SyncConflict[];
+};
+
+export type SyncState =
+  | "not_connected"
+  | "up_to_date"
+  | "pulled"
+  | "pushed"
+  | "conflict";
 
 export type SystemErrorCode = "io" | "json" | "emit" | "unknown";
 

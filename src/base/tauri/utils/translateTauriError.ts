@@ -1,4 +1,4 @@
-import i18n from "@/i18n";
+import { i18n } from "@/base/i18n/client";
 import type { AppError, AppErrorCode } from "../bindings";
 
 const fallbackCode: AppErrorCode = "unknown";
@@ -19,8 +19,12 @@ export function translateTauriError(error: unknown): string {
     return String(error);
   }
 
+  if (error.code === fallbackCode && error.message) {
+    return error.message;
+  }
+
   const translated = i18n.t(`errors.${error.code}`, { defaultValue: "" });
   if (translated) return translated;
 
-  return i18n.t(`errors.${fallbackCode}`);
+  return error.message || i18n.t(`errors.${fallbackCode}`);
 }
