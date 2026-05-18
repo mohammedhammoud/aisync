@@ -37,54 +37,10 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
-  macos-dmg:
+  build-macos:
     name: Build macOS DMG
-    runs-on: macos-latest
     needs: release-please
     if: always() && (needs.release-please.outputs.release_created == 'true' || inputs.tag != '')
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag || needs.release-please.outputs.tag_name }}
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: aarch64-apple-darwin,x86_64-apple-darwin
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Typecheck
-        run: pnpm typecheck
-
-      - name: Unit tests
-        run: pnpm test:unit
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Build and upload unsigned DMG
-        uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tagName: ${{ inputs.tag || needs.release-please.outputs.tag_name }}
-          releaseName: 'AISync ${{ inputs.tag || needs.release-please.outputs.tag_name }}'
-          releaseBody: 'Unsigned macOS DMG. macOS Gatekeeper may warn on first open.'
-          releaseDraft: false
-          prerelease: false
-          args: --target universal-apple-darwin
+    uses: ./.github/workflows/build-macos.yml
+    with:
+      tag: ${{ inputs.tag || needs.release-please.outputs.tag_name }}
