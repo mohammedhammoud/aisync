@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/mohammedhammoud/ai-sync/compare/aisync-v0.2.2...aisync-v0.2.3) (2026-05-18)
+
+
+### Bug Fixes
+
+* update cargo lock during release ([20aeabe](https://github.com/mohammedhammoud/ai-sync/commit/20aeabe1e93954f0e034d480fc17979e45c4744e))
+
 ## [0.2.2](https://github.com/mohammedhammoud/ai-sync/compare/aisync-v0.2.1...aisync-v0.2.2) (2026-05-18)
 
 
