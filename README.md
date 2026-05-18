@@ -87,6 +87,16 @@ pnpm build
 pnpm tauri build
 ```
 
+## Release
+
+The `Release` workflow runs Release Please from Conventional Commits on `main`. It opens a release PR; merging that PR updates versions and changelog, creates the `v*.*.*` tag, then builds an unsigned universal macOS DMG.
+
+The same workflow can also be run manually with an existing tag to rebuild/upload the DMG.
+
+No Apple Developer Program is required for this workflow. macOS Gatekeeper may warn users on first open because the app is not signed or notarized.
+
+The release build uploads the DMG to the GitHub Release.
+
 ## Quality checks
 
 ```sh
