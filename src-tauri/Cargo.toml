@@ -1,6 +1,6 @@
 [package]
 name = "aisync"
-version = "0.2.2"
+version = "0.2.3"
 description = "Local desktop utility for AI provider, skill, instruction, and sync management"
 authors = ["AISync"]
 edition = "2021"
