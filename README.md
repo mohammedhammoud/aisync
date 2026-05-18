@@ -60,6 +60,39 @@ For development and tests, the local root can be overridden with `AISYNC_HOME`.
 
 Linux and Windows adapters exist in the codebase, but they are not implemented yet.
 
+## Download and install on macOS
+
+1. Open the latest GitHub Release: <https://github.com/mohammedhammoud/ai-sync/releases/latest>
+2. Download the `.dmg` file from the release assets.
+3. Open the DMG.
+4. Drag `AISync.app` into `Applications`.
+5. Launch AISync from `Applications`.
+
+Only download AISync from the official GitHub Releases page above.
+
+AISync is currently unsigned and not notarized. On first launch, macOS Gatekeeper may show:
+
+```txt
+"AISync" cannot be opened because Apple cannot check it for malicious software.
+```
+
+Safe workaround:
+
+1. Move `AISync.app` to `Applications`.
+2. Right-click `AISync.app`.
+3. Choose `Open`.
+4. Confirm `Open` in the dialog.
+
+If macOS still blocks the app:
+
+1. Open `System Settings`.
+2. Go to `Privacy & Security`.
+3. Scroll to `Security`.
+4. Click `Open Anyway` for AISync.
+5. Confirm `Open`.
+
+The app checks the latest GitHub Release on startup and shows an in-app notification when a newer stable version is available.
+
 ## Development
 
 Install dependencies:
@@ -134,4 +167,4 @@ Keep changes small, focused, and easy to review. Prefer simple behavior, local-f
 
 ## License
 
-Add a license before publishing this repository as open source.
+MIT. See [LICENSE](./LICENSE).
