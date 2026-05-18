@@ -14,7 +14,7 @@
     "tauri": "tauri",
     "tauri:build": "tauri build",
     "tauri:dev": "tauri dev",
-    "generate:bindings": "cd src-tauri && cargo run --bin export_bindings",
+    "generate:bindings": "cd src-tauri && cargo run --features export-bindings --bin export_bindings",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "knip": "knip",

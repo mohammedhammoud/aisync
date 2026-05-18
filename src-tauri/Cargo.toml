@@ -5,6 +5,20 @@ description = "Local desktop utility for AI provider, skill, instruction, and sy
 authors = ["AISync"]
 edition = "2021"
 default-run = "aisync"
+autobins = false
+
+[[bin]]
+name = "aisync"
+path = "src/main.rs"
+
+[[bin]]
+name = "export_bindings"
+path = "src/bin/export_bindings.rs"
+required-features = ["export-bindings"]
+
+[features]
+default = []
+export-bindings = []
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
