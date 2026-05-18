@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use specta::Type;
 
 use super::defaults::default_target_configs;
+use crate::core::update::AvailableUpdate;
 
 #[derive(Clone, Debug, Deserialize, Serialize, Type, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
@@ -52,4 +53,5 @@ pub struct Defaults {
 pub struct Globals {
     pub app_name: String,
     pub setup_path: String,
+    pub available_update: Option<AvailableUpdate>,
 }

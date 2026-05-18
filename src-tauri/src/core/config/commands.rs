@@ -5,6 +5,7 @@ use crate::core::errors::{AppError, AppResult};
 use crate::core::events::CONFIGS_CHANGED;
 use crate::core::path_safety::{app_root, validate_id};
 use crate::core::sync;
+use crate::core::update::check_available_update;
 
 use super::defaults::default_new_target_config;
 use super::store::{read_config, write_config};
@@ -105,6 +106,7 @@ pub fn get_globals() -> AppResult<Globals> {
     Ok(Globals {
         app_name: APP_NAME.into(),
         setup_path: read_config()?.setup_path,
+        available_update: check_available_update(),
     })
 }
 

@@ -8,3 +8,4 @@ pub mod instructions;
 pub mod path_safety;
 pub mod skills;
 pub mod sync;
+pub mod update;
