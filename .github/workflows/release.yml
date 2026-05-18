@@ -37,6 +37,31 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
+      - name: Checkout release PR
+        if: steps.release.outputs.prs_created == 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Cargo lock version
+        if: steps.release.outputs.prs_created == 'true'
+        run: |
+          version=$(node -p "require('./package.json').version")
+          cargo update --manifest-path src-tauri/Cargo.toml -p aisync --precise "$version"
+
+      - name: Commit Cargo lock version
+        if: steps.release.outputs.prs_created == 'true'
+        run: |
+          if git diff --quiet -- src-tauri/Cargo.lock; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src-tauri/Cargo.lock
+          git commit -m "chore: update cargo lock version"
+          git push
+
   build-macos:
     name: Build macOS DMG
     needs: release-please
