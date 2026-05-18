@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/mohammedhammoud/ai-sync/compare/aisync-v0.2.1...aisync-v0.2.2) (2026-05-18)
+
+
+### Bug Fixes
+
+* avoid bundling bindings exporter ([0c16bc3](https://github.com/mohammedhammoud/ai-sync/commit/0c16bc3210b29dccb173ebd7ef42c63aea28d76c))
+
 ## [0.2.1](https://github.com/mohammedhammoud/ai-sync/compare/aisync-v0.2.0...aisync-v0.2.1) (2026-05-18)
 
 
