@@ -2,6 +2,7 @@ pub mod config;
 pub mod constants;
 pub mod errors;
 pub mod events;
+pub(crate) mod fs_utils;
 pub mod github;
 pub mod instructions;
 pub mod path_safety;

@@ -5,6 +5,7 @@ use std::path::PathBuf;
 use uuid::Uuid;
 
 use crate::core::errors::{AppError, AppResult};
+use crate::core::fs_utils::write_json_pretty;
 use crate::platform::platform;
 
 use super::types::SyncConflict;
@@ -14,6 +15,8 @@ const SETTINGS_FILE: &str = "github.json";
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct GithubLocalSettings {
+    /// Anonymous local installation ID used in the sync manifest to distinguish devices.
+    /// It is not an auth token and is cleared only if the settings file is removed.
     pub device_id: String,
     pub github: Option<GithubRepoSettings>,
 }
@@ -51,9 +54,7 @@ pub fn read_local_settings() -> AppResult<GithubLocalSettings> {
 }
 
 pub fn write_local_settings(settings: &GithubLocalSettings) -> AppResult<()> {
-    fs::create_dir_all(settings_dir()).map_err(AppError::io)?;
-    let content = serde_json::to_string_pretty(settings).map_err(AppError::json)?;
-    fs::write(settings_path(), format!("{content}\n")).map_err(AppError::io)
+    write_json_pretty(&settings_path(), settings)
 }
 
 pub fn get_or_create_device_id() -> AppResult<String> {

@@ -90,7 +90,7 @@ pub fn merge_remote_local(
     if !conflicts.is_empty() {
         let conflict_root = app_root()
             .join(CONFLICTS_DIR)
-            .join(chrono::Utc::now().format("%Y%m%d%H%M%S").to_string());
+            .join(chrono::Utc::now().format("%Y%m%d%H%M%S%f").to_string());
 
         for conflict in &conflicts {
             write_conflict_file(
