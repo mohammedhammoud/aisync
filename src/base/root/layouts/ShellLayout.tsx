@@ -48,9 +48,11 @@ export function ShellLayout() {
     },
   });
   const title = t(titleKey);
-  const settingsBadge = availableUpdate
-    ? { label: t("updates.availableShort"), variant: "violet" as const }
-    : githubSyncBadge;
+  const settingsBadge =
+    githubSyncBadge ??
+    (availableUpdate
+      ? { label: t("updates.availableShort"), variant: "violet" as const }
+      : undefined);
 
   function startWindowDrag() {
     if (!("__TAURI_INTERNALS__" in window)) {
