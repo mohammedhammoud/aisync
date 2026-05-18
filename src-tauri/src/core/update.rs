@@ -49,7 +49,7 @@ pub fn is_newer_stable_version(candidate: &str, current: &str) -> bool {
 
 pub fn check_available_update() -> Option<AvailableUpdate> {
     let client = reqwest::blocking::Client::builder()
-        .timeout(Duration::from_secs(4))
+        .timeout(Duration::from_secs(1))
         .build()
         .ok()?;
     let response = client
