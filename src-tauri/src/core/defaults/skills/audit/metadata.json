@@ -3,6 +3,5 @@
   "name": "Audit",
   "description": "Audit changes for bugs, risks, and missing tests.",
   "enabled": true,
-  "tags": [],
-  "sourcePath": null
+  "tags": []
 }

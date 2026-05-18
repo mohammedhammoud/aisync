@@ -7,7 +7,6 @@ const skill = {
   description: "Review changed code",
   enabled: true,
   tags: [],
-  sourcePath: null,
 };
 
 const meta = {

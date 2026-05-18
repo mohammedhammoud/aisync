@@ -3,6 +3,5 @@
   "name": "Refactor",
   "description": "Improve code structure without changing behavior.",
   "enabled": true,
-  "tags": [],
-  "sourcePath": null
+  "tags": []
 }

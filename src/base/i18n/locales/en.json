@@ -31,7 +31,7 @@
     "name": "Name",
     "skillsPath": "Path to skills",
     "instructionsPath": "Path to instructions",
-    "syncBehavior": "Sync always creates symbolic links. Existing files or folders are backed up before the app replaces them, so targets stay small and changes keep pointing at the shared source.",
+    "syncBehavior": "Sync creates symbolic links. To protect local work, AISync refuses to replace files or folders it did not create. Remove or move existing targets before syncing.",
     "enabled": "Enabled",
     "new": "New",
     "save": "Save",
