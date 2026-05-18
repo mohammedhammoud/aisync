@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/mohammedhammoud/ai-sync/compare/aisync-v0.2.3...aisync-v0.3.0) (2026-05-18)
+
+
+### Features
+
+* **core:** add update check module ([c7cd510](https://github.com/mohammedhammoud/ai-sync/commit/c7cd5109e03bbaae7b1c0564cf19ba768d788f3d))
+* **core:** wire update check into config ([ae7e3ed](https://github.com/mohammedhammoud/ai-sync/commit/ae7e3ed48b782b6a745529d2ccdd45722f2711c1))
+* **ui:** add bindings and i18n for updates ([b30d90d](https://github.com/mohammedhammoud/ai-sync/commit/b30d90d166f744cce03c47af1c7bf8fca2ed4c75))
+* **ui:** add update notice component ([1fbe4fa](https://github.com/mohammedhammoud/ai-sync/commit/1fbe4fa6c2e61af250ce225fb6bf993c06bb2ae0))
+* **ui:** show update badge on settings nav ([9d9c2e4](https://github.com/mohammedhammoud/ai-sync/commit/9d9c2e434db95233299dd8b35a54159c00ee91eb))
+
 ## [0.2.3](https://github.com/mohammedhammoud/ai-sync/compare/aisync-v0.2.2...aisync-v0.2.3) (2026-05-18)
 
 
