@@ -9,7 +9,11 @@
 </p>
 
 <p align="center">
-  <strong>Local-first</strong> · <strong>macOS</strong> · <strong>Tauri</strong> · <strong>React</strong>
+  <strong>Local-first</strong> · <strong>Optional GitHub sync</strong> · <strong>macOS</strong> · <strong>Tauri</strong> · <strong>React</strong>
+</p>
+
+<p align="center">
+  <img src="./screenshot.png" alt="AISync screenshot" />
 </p>
 
 ## Overview
@@ -18,13 +22,15 @@ AISync gives you one place to edit the prompts, skills, and instruction files yo
 
 It keeps the source of truth in a local AISync folder, then syncs enabled skills and global instructions into configured tool folders with symbolic links. The default targets are Codex, Copilot, and Pi, and custom targets can be added from the app.
 
-No account. No cloud sync. Your files stay on your machine.
+AISync is local-first by default. You can also connect GitHub to back up and sync your AISync instructions and skills through a private repository.
 
 ## Features
 
 - Manage reusable AI-agent skills.
 - Edit shared global instructions.
 - Sync into multiple tool configurations.
+- Optionally sync instructions and skills through GitHub.
+- Resolve local/remote sync conflicts.
 - Enable or disable individual skills and targets.
 - Backup existing target files before replacing them.
 - Light, dark, and system themes.
@@ -39,6 +45,8 @@ AISync stores its data under `~/.aisync` by default:
 - `instructions.md` stores global instructions.
 
 When you save changes, AISync updates enabled targets by creating symlinks from the target tool folders back to the AISync source files. Existing target files are backed up into `.aisync-backups` before they are replaced.
+
+If GitHub sync is enabled, AISync uses GitHub device login, stores the token in the system keychain, and syncs AISync-owned instructions and skills under `.aisync/` in a private `aisync-config` repository.
 
 For development and tests, the local root can be overridden with `AISYNC_HOME`.
 
