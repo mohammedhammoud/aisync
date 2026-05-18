@@ -23,3 +23,11 @@ test("locks navigation on unsaved skill create form", async ({ page }) => {
   );
   await expect(page.getByRole("status")).toContainText(/save|spara/i);
 });
+
+test("navigates to created skill after save", async ({ page }) => {
+  await page.goto("/skills/new");
+
+  await page.getByRole("button", { name: /save|spara/i }).click();
+
+  await expect(page).toHaveURL("/skills/new-skill");
+});

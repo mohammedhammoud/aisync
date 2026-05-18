@@ -42,6 +42,7 @@ function SkillsCreateView() {
 
     releaseLock();
     navigate({
+      ignoreBlocker: true,
       params: { skillId: metadata.id },
       replace: true,
       to: "/skills/$skillId",
