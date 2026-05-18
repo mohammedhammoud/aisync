@@ -7,6 +7,7 @@ import { AppHeader } from "@/base/root/components/AppHeader";
 import { useAppLockContext } from "@/base/root/appLock";
 import { ShellSurface } from "@/base/root/theme/ShellSurface";
 import { useGithubSyncNavigationBadge } from "@/features/github/hooks/useGithubSyncNavigationBadge";
+import { useGlobalsStore } from "@/base/store/globalsStore";
 import { Navigation } from "@/ui/components/Navigation";
 import { AppLogo } from "@/ui/components/AppLogo";
 import { Text } from "@/ui/components/Text";
@@ -16,6 +17,9 @@ export function ShellLayout() {
   const { t } = useTranslation();
   const { isLocked, lockMessage } = useAppLockContext();
   const { githubSyncBadge } = useGithubSyncNavigationBadge();
+  const availableUpdate = useGlobalsStore(
+    (state) => state.globals?.availableUpdate,
+  );
   const { globalClasses, getVariant } = useTheme();
 
   const v = {
@@ -44,6 +48,9 @@ export function ShellLayout() {
     },
   });
   const title = t(titleKey);
+  const settingsBadge = availableUpdate
+    ? { label: t("updates.availableShort"), variant: "violet" as const }
+    : githubSyncBadge;
 
   function startWindowDrag() {
     if (!("__TAURI_INTERNALS__" in window)) {
@@ -99,7 +106,7 @@ export function ShellLayout() {
             to="/instructions"
           />
           <Navigation.Item
-            badge={githubSyncBadge}
+            badge={settingsBadge}
             disabled={isLocked}
             icon={Settings}
             label={t("nav.settings")}

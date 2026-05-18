@@ -29,7 +29,7 @@ type NavigationProps = {
 
 type NavigationItemTo = NonNullable<LinkProps["to"]>;
 
-type NavigationBadgeVariant = "red" | "yellow";
+type NavigationBadgeVariant = "red" | "yellow" | "violet";
 
 export type NavigationBadge = {
   label?: string;
