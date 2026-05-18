@@ -21,7 +21,6 @@ concurrency:
 
 jobs:
   release-please:
-    name: Open release PR or tag release
     runs-on: ubuntu-latest
     if: github.event_name != 'workflow_dispatch' || inputs.tag == ''
     outputs:
@@ -63,7 +62,6 @@ jobs:
           git push
 
   build-macos:
-    name: Build macOS DMG
     needs: release-please
     if: always() && (needs.release-please.outputs.release_created == 'true' || inputs.tag != '')
     uses: ./.github/workflows/build-macos.yml

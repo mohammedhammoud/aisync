@@ -18,7 +18,6 @@ permissions:
 
 jobs:
   build:
-    name: Build macOS DMG
     runs-on: macos-latest
 
     steps:
