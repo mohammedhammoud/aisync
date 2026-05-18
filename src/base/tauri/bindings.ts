@@ -71,6 +71,11 @@ export type AppErrorCode =
   | GithubErrorCode
   | SystemErrorCode;
 
+export type AvailableUpdate = {
+  version: string;
+  downloadUrl: string;
+};
+
 export type ConfigErrorCode = "config_not_found" | "config_already_exists";
 
 export type Defaults = {
@@ -107,6 +112,7 @@ export type GithubSyncStatus = {
 export type Globals = {
   appName: string;
   setupPath: string;
+  availableUpdate: AvailableUpdate | null;
 };
 
 export type PathErrorCode =

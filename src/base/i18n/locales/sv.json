@@ -103,6 +103,12 @@
     "badgePending": "Lokala ändringar väntar",
     "badgeConflict": "GitHub-synkkonflikt"
   },
+  "updates": {
+    "available": "AISync {{version}} finns tillgänglig.",
+    "availableShort": "Uppdatering finns",
+    "download": "Ladda ner",
+    "downloadHint": "Ladda ner senaste DMG från GitHub Releases."
+  },
   "dirty": {
     "unsaved": "Osparat, spara eller förkasta.",
     "discard": "Förkasta"

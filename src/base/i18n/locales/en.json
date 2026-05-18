@@ -103,6 +103,12 @@
     "badgePending": "Local changes pending",
     "badgeConflict": "GitHub sync conflict"
   },
+  "updates": {
+    "available": "AISync {{version}} is available.",
+    "availableShort": "Update available",
+    "download": "Download",
+    "downloadHint": "Download the latest DMG from GitHub Releases."
+  },
   "dirty": {
     "unsaved": "Unsaved, save or discard.",
     "discard": "Discard"
