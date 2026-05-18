@@ -36,7 +36,7 @@ export function ConfigForm({
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         <FormField label={t("configs.id")}>
           <TextInput
             spellCheck={false}

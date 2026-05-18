@@ -40,7 +40,7 @@ export function ConfigList({
         {configs.length ? (
           <RadioGroup
             aria-label={t("configs.listLabel")}
-            as="nav"
+            as="div"
             className="flex flex-col gap-2"
             disabled={disabled}
             onChange={(to: string) => navigate({ to })}

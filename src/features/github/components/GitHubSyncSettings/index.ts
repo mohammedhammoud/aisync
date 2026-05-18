@@ -1,0 +1,1 @@
+export { GitHubSyncSettings } from "./GitHubSyncSettings";

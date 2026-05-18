@@ -1,0 +1,1 @@
+export { GitHubSyncPanel } from "./GitHubSyncPanel";

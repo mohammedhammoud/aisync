@@ -14,7 +14,7 @@ export function AppHeader({ lockMessage, title }: AppHeaderProps) {
   const v = getVariant("neutral");
 
   return (
-    <header className="mb-3 flex h-11 items-start justify-between">
+    <header className="mb-4 flex h-11 items-start justify-between">
       <Text
         as="h1"
         className={cx(

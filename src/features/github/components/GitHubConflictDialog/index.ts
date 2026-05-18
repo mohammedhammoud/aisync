@@ -1,0 +1,1 @@
+export { GitHubConflictDialog } from "./GitHubConflictDialog";
