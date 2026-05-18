@@ -46,7 +46,7 @@ AISync stores its data under `~/.aisync` by default:
 
 When you save changes, AISync updates enabled targets by creating symlinks from the target tool folders back to the AISync source files. Existing target files are backed up into `.aisync-backups` before they are replaced.
 
-If GitHub sync is enabled, AISync uses GitHub device login, stores the token in the system keychain, and syncs AISync-owned instructions and skills under `.aisync/` in a private `aisync-config` repository.
+If GitHub sync is enabled, AISync uses GitHub device login, stores the token in the system keychain, and syncs AISync-owned instructions and skills under `.aisync/` in a private `aisync-config` repository. macOS may ask for permission to store or access the token in Keychain.
 
 For development and tests, the local root can be overridden with `AISYNC_HOME`.
 
@@ -90,6 +90,12 @@ If macOS still blocks the app:
 3. Scroll to `Security`.
 4. Click `Open Anyway` for AISync.
 5. Confirm `Open`.
+
+If that still does not work, remove the quarantine flag manually. Only do this for an app downloaded from the official release page:
+
+```sh
+xattr -dr com.apple.quarantine /Applications/AISync.app
+```
 
 The app checks the latest GitHub Release on startup and shows an in-app notification when a newer stable version is available.
 
