@@ -48,6 +48,8 @@ export function CheckboxField({
           v.field.outline.base.background,
           v.field.outline.base.readableColor,
           v.field.outline.focus,
+          "focus-visible:ring-2",
+          globalClasses.focusRing,
           v.checked.solid.checked,
           "disabled:cursor-not-allowed",
           globalClasses.disabledOpacity,

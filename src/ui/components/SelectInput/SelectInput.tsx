@@ -18,6 +18,8 @@ export function SelectInput({
         v.outline.base.background,
         v.outline.base.readableColor,
         v.outline.focus,
+        "focus-visible:ring-2",
+        globalClasses.focusRing,
         "disabled:cursor-not-allowed",
         globalClasses.disabledOpacity,
         className,

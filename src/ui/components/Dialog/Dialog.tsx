@@ -65,12 +65,12 @@ export function Dialog({
             v.panel.border,
             v.panel.base.readableColor,
             v.text.outline.border,
-            "relative flex max-h-[calc(100vh-2rem)] w-full max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded p-4 shadow-[0_1.5rem_5rem_rgba(0,0,0,0.55)]",
+            "relative flex max-h-[calc(100vh-2rem)] w-full flex-col overflow-hidden rounded p-4 shadow-[0_1.5rem_5rem_rgba(0,0,0,0.55)]",
             sizeClassName[size],
           )}
         >
           {(heading || showCloseButton) && (
-            <div className="mb-2 flex items-start justify-between gap-3">
+            <div className="mb-2 flex items-start justify-between gap-2">
               {heading ? (
                 <DialogTitle
                   className={cx(
@@ -86,8 +86,10 @@ export function Dialog({
               {showCloseButton && (
                 <Button
                   aria-label={t("common.close")}
-                  className="h-7 px-2"
+                  iconOnly
+                  mode="outline"
                   onClick={() => onClose(false)}
+                  size="sm"
                 >
                   <X size={14} />
                 </Button>
@@ -97,7 +99,7 @@ export function Dialog({
           {description && (
             <Description
               as={Text}
-              className={cx("mb-3 text-xs", v.text.outline.text)}
+              className={cx("mb-2 text-xs", v.text.outline.text)}
             >
               {description}
             </Description>

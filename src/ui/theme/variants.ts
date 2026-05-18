@@ -1,4 +1,10 @@
-export const variants = ["neutral", "red", "yellow", "violet"] as const;
+export const variants = [
+  "neutral",
+  "red",
+  "green",
+  "yellow",
+  "violet",
+] as const;
 
 export type Variant = (typeof variants)[number];
 export type VariantMode = "solid" | "outline";
@@ -16,6 +22,7 @@ type VariantProps = {
   border: string;
   checked: string;
   focus: string;
+  accent: string;
   text: string;
 };
 
@@ -44,6 +51,7 @@ export const VARIANT: Record<Variant, VariantType> = {
       checked:
         "data-[checked]:border-neutral-500 data-[checked]:bg-neutral-500 data-[checked]:text-white dark:data-[checked]:border-neutral-400 dark:data-[checked]:bg-neutral-400 dark:data-[checked]:text-black",
       focus: "focus:outline-neutral-500 focus:border-neutral-400",
+      accent: "bg-neutral-500 dark:bg-neutral-400",
       text: "text-neutral-600 dark:text-neutral-400",
     },
     solid: {
@@ -63,10 +71,11 @@ export const VARIANT: Record<Variant, VariantType> = {
         background: "bg-neutral-300 dark:bg-neutral-700",
         readableColor: "text-black dark:text-white",
       },
-      border: "border border-neutral-200 dark:border-neutral-700",
+      border: "border border-neutral-300 dark:border-neutral-700",
       checked:
         "data-[checked]:border-neutral-700 data-[checked]:bg-neutral-700 data-[checked]:text-white dark:data-[checked]:border-neutral-200 dark:data-[checked]:bg-neutral-200 dark:data-[checked]:text-black",
       focus: "focus:outline-neutral-500 focus:border-neutral-300",
+      accent: "bg-neutral-500 dark:bg-neutral-400",
       text: "text-neutral-600 dark:text-neutral-300",
     },
   },
@@ -92,11 +101,12 @@ export const VARIANT: Record<Variant, VariantType> = {
       checked:
         "data-[checked]:border-red-600 data-[checked]:bg-red-600 data-[checked]:text-white dark:data-[checked]:border-red-500 dark:data-[checked]:bg-red-500 dark:data-[checked]:text-white",
       focus: "focus:outline-red-500 focus:border-red-400",
+      accent: "bg-red-500 dark:bg-red-400",
       text: "text-red-600 dark:text-red-400",
     },
     solid: {
       base: {
-        background: "bg-red-100 dark:bg-red-900",
+        background: "bg-red-200 dark:bg-red-900",
         readableColor: "text-black dark:text-white",
       },
       hover: {
@@ -111,11 +121,62 @@ export const VARIANT: Record<Variant, VariantType> = {
         background: "bg-red-300 dark:bg-red-800",
         readableColor: "text-black dark:text-white",
       },
-      border: "border border-red-200 dark:border-red-800",
+      border: "border border-red-300 dark:border-red-800",
       checked:
         "data-[checked]:border-red-700 data-[checked]:bg-red-700 data-[checked]:text-white dark:data-[checked]:border-red-400 dark:data-[checked]:bg-red-400 dark:data-[checked]:text-black",
       focus: "focus:outline-red-500 focus:border-red-300",
+      accent: "bg-red-500 dark:bg-red-400",
       text: "text-red-600 dark:text-red-300",
+    },
+  },
+  green: {
+    outline: {
+      base: {
+        background: "bg-green-50 dark:bg-green-950",
+        readableColor: "text-black dark:text-white",
+      },
+      hover: {
+        background: "hover:bg-green-200 dark:hover:bg-green-900",
+        readableColor: "hover:text-black dark:hover:text-white",
+      },
+      active: {
+        background: "active:bg-green-300 dark:active:bg-green-800",
+        readableColor: "active:text-black dark:active:text-white",
+      },
+      selected: {
+        background: "bg-green-300 dark:bg-green-900",
+        readableColor: "text-black dark:text-white",
+      },
+      border: "border border-green-300 dark:border-green-700",
+      checked:
+        "data-[checked]:border-green-600 data-[checked]:bg-green-600 data-[checked]:text-white dark:data-[checked]:border-green-500 dark:data-[checked]:bg-green-500 dark:data-[checked]:text-white",
+      focus: "focus:outline-green-500 focus:border-green-400",
+      accent: "bg-green-500 dark:bg-green-400",
+      text: "text-green-700 dark:text-green-400",
+    },
+    solid: {
+      base: {
+        background: "bg-green-200 dark:bg-green-900",
+        readableColor: "text-black dark:text-white",
+      },
+      hover: {
+        background: "hover:bg-green-200 dark:hover:bg-green-800",
+        readableColor: "hover:text-black dark:text-white",
+      },
+      active: {
+        background: "active:bg-green-300 dark:active:bg-green-800",
+        readableColor: "active:text-black dark:active:text-white",
+      },
+      selected: {
+        background: "bg-green-300 dark:bg-green-800",
+        readableColor: "text-black dark:text-white",
+      },
+      border: "border border-green-300 dark:border-green-800",
+      checked:
+        "data-[checked]:border-green-700 data-[checked]:bg-green-700 data-[checked]:text-white dark:data-[checked]:border-green-400 dark:data-[checked]:bg-green-400 dark:data-[checked]:text-black",
+      focus: "focus:outline-green-500 focus:border-green-300",
+      accent: "bg-green-500 dark:bg-green-400",
+      text: "text-green-700 dark:text-green-300",
     },
   },
   yellow: {
@@ -140,11 +201,12 @@ export const VARIANT: Record<Variant, VariantType> = {
       checked:
         "data-[checked]:border-yellow-500 data-[checked]:bg-yellow-500 data-[checked]:text-black dark:data-[checked]:border-yellow-400 dark:data-[checked]:bg-yellow-400 dark:data-[checked]:text-black",
       focus: "focus:outline-yellow-500 focus:border-yellow-400",
-      text: "text-yellow-600 dark:text-yellow-400",
+      accent: "bg-yellow-400 dark:bg-yellow-300",
+      text: "text-yellow-700 dark:text-yellow-400",
     },
     solid: {
       base: {
-        background: "bg-yellow-100 dark:bg-yellow-900",
+        background: "bg-yellow-200 dark:bg-yellow-900",
         readableColor: "text-black dark:text-white",
       },
       hover: {
@@ -159,11 +221,12 @@ export const VARIANT: Record<Variant, VariantType> = {
         background: "bg-yellow-300 dark:bg-yellow-800",
         readableColor: "text-black dark:text-white",
       },
-      border: "border border-yellow-200 dark:border-yellow-800",
+      border: "border border-yellow-300 dark:border-yellow-800",
       checked:
         "data-[checked]:border-yellow-600 data-[checked]:bg-yellow-600 data-[checked]:text-black dark:data-[checked]:border-yellow-300 dark:data-[checked]:bg-yellow-300 dark:data-[checked]:text-black",
       focus: "focus:outline-yellow-500 focus:border-yellow-300",
-      text: "text-yellow-600 dark:text-yellow-300",
+      accent: "bg-yellow-400 dark:bg-yellow-300",
+      text: "text-yellow-700 dark:text-yellow-300",
     },
   },
   violet: {
@@ -188,6 +251,7 @@ export const VARIANT: Record<Variant, VariantType> = {
       checked:
         "data-[checked]:border-violet-600 data-[checked]:bg-violet-600 data-[checked]:text-white dark:data-[checked]:border-violet-500 dark:data-[checked]:bg-violet-500 dark:data-[checked]:text-white",
       focus: "focus:outline-violet-500 focus:border-violet-400",
+      accent: "bg-violet-500 dark:bg-violet-400",
       text: "text-violet-700 dark:text-violet-400",
     },
     solid: {
@@ -212,6 +276,7 @@ export const VARIANT: Record<Variant, VariantType> = {
         "data-[checked]:border-violet-600 data-[checked]:bg-violet-600 data-[checked]:text-white",
       focus:
         "focus:outline-violet-500 focus:border-violet-500 dark:focus:border-violet-300",
+      accent: "bg-violet-500 dark:bg-violet-400",
       text: "text-violet-700 dark:text-violet-300",
     },
   },

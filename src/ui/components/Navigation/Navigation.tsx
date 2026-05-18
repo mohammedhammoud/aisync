@@ -16,6 +16,7 @@ import {
   type ReactNode,
 } from "react";
 import { cx } from "@/base/utils/cx";
+import { Indicator } from "@/ui/components/Indicator";
 import { useTheme } from "@/ui/theme/useTheme";
 
 type NavigationIcon = ComponentType<{ className?: string }>;
@@ -28,10 +29,18 @@ type NavigationProps = {
 
 type NavigationItemTo = NonNullable<LinkProps["to"]>;
 
+type NavigationBadgeVariant = "red" | "yellow";
+
+export type NavigationBadge = {
+  label?: string;
+  variant: NavigationBadgeVariant;
+};
+
 type NavigationItemProps = Omit<
   LinkProps,
   "activeProps" | "children" | "className" | "onClick" | "to"
 > & {
+  badge?: NavigationBadge;
   disabled?: boolean;
   icon: NavigationIcon;
   label: string;
@@ -51,6 +60,7 @@ function isNavigationItemElement(
 }
 
 function NavigationItem({
+  badge,
   disabled = false,
   icon: Icon,
   label,
@@ -82,6 +92,8 @@ function NavigationItem({
             "flex w-full items-center gap-2 rounded p-3 text-left no-underline border-0",
             v.neutral.outline.base.readableColor,
             v.neutral.outline.focus,
+            "focus-visible:ring-2",
+            globalClasses.focusRing,
             checked && [
               "font-bold",
               v.violet.solid.selected.background,
@@ -102,7 +114,10 @@ function NavigationItem({
           {...linkProps}
         >
           <Icon className="h-4 w-4" />
-          {label}
+          <span className="min-w-0 flex-1">{label}</span>
+          {badge ? (
+            <Indicator label={badge.label} variant={badge.variant} />
+          ) : null}
         </Link>
       )}
     </Radio>
@@ -127,15 +142,16 @@ export function Navigation({
   }) as ReactElement<{ to: NavigationItemTo }> | undefined;
 
   return (
-    <RadioGroup
-      aria-label={ariaLabel}
-      as="nav"
-      className={cx("grid gap-2", className)}
-      onChange={(to: NavigationItemTo) => navigate({ to })}
-      value={activeValue?.props.to ?? pathname}
-    >
-      {children}
-    </RadioGroup>
+    <nav aria-label={ariaLabel}>
+      <RadioGroup
+        as="div"
+        className={cx("grid gap-2", className)}
+        onChange={(to: NavigationItemTo) => navigate({ to })}
+        value={activeValue?.props.to ?? pathname}
+      >
+        {children}
+      </RadioGroup>
+    </nav>
   );
 }
 
