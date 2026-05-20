@@ -77,9 +77,14 @@ describe("locales", () => {
 
   test("does not keep stale locale keys", () => {
     const usedKeys = usedTranslationKeys();
-    const staleKeys = Object.keys(enKeys).filter(
-      (key) => !usedKeys.has(key) && !key.startsWith("errors."),
-    );
+    const staleKeys = Object.keys(enKeys).filter((key) => {
+      if (usedKeys.has(key) || key.startsWith("errors.")) {
+        return false;
+      }
+
+      const singularKey = key.replace(/_plural$/, "");
+      return singularKey === key || !usedKeys.has(singularKey);
+    });
 
     expect(staleKeys).toEqual([]);
   });
