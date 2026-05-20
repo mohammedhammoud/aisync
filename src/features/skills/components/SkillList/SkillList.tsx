@@ -7,15 +7,18 @@ import type { SkillMetadata } from "@/base/tauri/bindings";
 import { Button } from "@/ui/components/Button";
 import { ListRow } from "@/ui/components/ListRow";
 import { Alert } from "@/ui/components/Alert";
+import { Indicator } from "@/ui/components/Indicator";
 
 type SkillListProps = {
   disabled?: boolean;
+  linkStatusSkillIds?: Set<string>;
   onCreate: () => void;
   skills: SkillMetadata[];
 };
 
 export function SkillList({
   disabled = false,
+  linkStatusSkillIds = new Set<string>(),
   onCreate,
   skills,
 }: SkillListProps) {
@@ -24,7 +27,6 @@ export function SkillList({
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
-
   return (
     <div className="flex flex-col gap-4">
       <Button
@@ -48,6 +50,7 @@ export function SkillList({
           >
             {skills.map((skill) => {
               const to = `/skills/${skill.id}`;
+              const hasLinkStatus = linkStatusSkillIds.has(skill.id);
 
               return (
                 <Radio as={Fragment} key={skill.id} value={to}>
@@ -67,6 +70,14 @@ export function SkillList({
                         aria-current={isActive ? "true" : undefined}
                         description={skill.description || skill.id}
                         disabled={disabled}
+                        indicator={
+                          hasLinkStatus ? (
+                            <Indicator
+                              label={t("skills.syncBlocked")}
+                              variant="red"
+                            />
+                          ) : undefined
+                        }
                         selected={isActive}
                         title={skill.name}
                       />

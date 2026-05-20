@@ -8,6 +8,7 @@ import { useAppLockContext } from "@/base/root/appLock";
 import { ShellSurface } from "@/base/root/theme/ShellSurface";
 import { useGithubSyncNavigationBadge } from "@/features/github/hooks/useGithubSyncNavigationBadge";
 import { useGlobalsStore } from "@/base/store/globalsStore";
+import { useLinkStatusNavigationBadges } from "@/core/link-status/hooks/useLinkStatusNavigationBadges";
 import { Navigation } from "@/ui/components/Navigation";
 import { AppLogo } from "@/ui/components/AppLogo";
 import { Text } from "@/ui/components/Text";
@@ -17,6 +18,7 @@ export function ShellLayout() {
   const { t } = useTranslation();
   const { isLocked, lockMessage } = useAppLockContext();
   const { githubSyncBadge } = useGithubSyncNavigationBadge();
+  const { configsBadge, skillsBadge } = useLinkStatusNavigationBadges();
   const availableUpdate = useGlobalsStore(
     (state) => state.globals?.availableUpdate,
   );
@@ -90,12 +92,14 @@ export function ShellLayout() {
       >
         <Navigation aria-label={t("nav.primary")}>
           <Navigation.Item
+            badge={skillsBadge}
             disabled={isLocked}
             icon={Sparkles}
             label={t("nav.skills")}
             to="/skills"
           />
           <Navigation.Item
+            badge={configsBadge}
             disabled={isLocked}
             icon={SlidersHorizontal}
             label={t("nav.configs")}

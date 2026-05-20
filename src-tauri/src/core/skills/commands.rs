@@ -27,6 +27,9 @@ pub fn get_skill(skill_id: String) -> AppResult<SkillEditorRecord> {
     validate_id(&skill_id)?;
     let dir = skills_dir().join(&skill_id);
     assert_child(&app_root(), &dir)?;
+    if !dir.exists() {
+        return Err(AppError::new(SkillErrorCode::NotFound, "Skill not found"));
+    }
     let content = fs::read_to_string(dir.join("SKILL.md")).map_err(AppError::io)?;
     let metadata_content = fs::read_to_string(dir.join("metadata.json")).map_err(AppError::io)?;
     let metadata = serde_json::from_str(&metadata_content).map_err(AppError::json)?;

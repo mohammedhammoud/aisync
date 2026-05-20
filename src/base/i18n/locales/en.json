@@ -20,7 +20,8 @@
     "save": "Save",
     "delete": "Delete",
     "noSkills": "No skills found. Create a new skill to get started.",
-    "notFound": "Skill not found."
+    "notFound": "Skill not found.",
+    "syncBlocked": "Sync blocked"
   },
   "configs": {
     "title": "Configurations",
@@ -53,6 +54,26 @@
     "themeSystem": "System",
     "themeLight": "Light",
     "themeDark": "Dark"
+  },
+  "sync": {
+    "blocked": "Link status",
+    "blockedDescription": "Review targets that are missing or not owned by AISync.",
+    "linkStatusTitle": "{{count}} link target needs attention",
+    "linkStatusTitle_plural": "{{count}} link targets need attention",
+    "linkStatusHint": "Review missing links and repair the ones AISync should manage.",
+    "skillsNeedAttention": "{{count}} skill needs attention",
+    "skillsNeedAttention_plural": "{{count}} skills need attention",
+    "configsNeedAttention": "{{count}} configuration needs attention",
+    "configsNeedAttention_plural": "{{count}} configurations need attention",
+    "instructions": "Instructions",
+    "missing": "Missing link",
+    "targetBlocked": "Blocked target",
+    "details": "Details",
+    "review": "Review",
+    "fix": "Repair",
+    "replace": "Replace",
+    "replaceHeading": "Replace this target?",
+    "replaceMessage": "AISync will back up and replace this path with a symlink:\n{{path}}"
   },
   "github": {
     "title": "GitHub Sync",

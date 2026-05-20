@@ -1,6 +1,7 @@
 import { RotateCcw, Save, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { SkillMetadata } from "@/base/tauri/bindings";
+import type { LinkStatus, SkillMetadata } from "@/base/tauri/bindings";
+import { LinkStatusNotice } from "@/core/link-status/components/LinkStatusNotice";
 import { Button } from "@/ui/components/Button";
 import { ConfirmButton } from "@/ui/components/ConfirmButton";
 import { CheckboxField } from "@/ui/components/CheckboxField";
@@ -16,10 +17,12 @@ type SkillFormProps = {
   isDirty: boolean;
   isUpdating?: boolean;
   metadata: SkillMetadata;
+  linkStatuses?: LinkStatus[];
   onChangeContent: (value: string) => void;
   onChangeMetadata: (metadata: SkillMetadata) => void;
   onDelete?: () => void;
   onDiscard: () => void;
+  onFixLinkStatus?: (status: LinkStatus) => Promise<void>;
   onSave: () => void;
 };
 
@@ -30,14 +33,15 @@ export function SkillForm({
   isDirty,
   isUpdating = false,
   metadata,
+  linkStatuses = [],
   onChangeContent,
   onChangeMetadata,
   onDelete,
   onDiscard,
+  onFixLinkStatus,
   onSave,
 }: SkillFormProps) {
   const { t } = useTranslation();
-
   return (
     <div className="flex h-full flex-col gap-4">
       <div className="grid grid-cols-2 gap-4">
@@ -86,6 +90,10 @@ export function SkillForm({
       >
         {t("skills.enabled")}
       </CheckboxField>
+      <LinkStatusNotice
+        onFixLinkStatus={onFixLinkStatus}
+        statuses={linkStatuses}
+      />
       <TextEditor
         label={t("skills.content")}
         value={content}
