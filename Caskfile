@@ -1,0 +1,12 @@
+cask "aisync" do
+  version "0.3.0" # x-release-please-version
+  sha256 :no_check
+
+  url "https://github.com/mohammedhammoud/aisync/releases/download/aisync-v#{version}/AISync_#{version}_universal.dmg",
+      verified: "github.com/mohammedhammoud/aisync/"
+  name "AISync"
+  desc "Local desktop utility for AI provider, skill, instruction, and sync management"
+  homepage "https://github.com/mohammedhammoud/aisync"
+
+  app "AISync.app"
+end

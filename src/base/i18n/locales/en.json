@@ -125,8 +125,8 @@
   "updates": {
     "available": "AISync {{version}} is available.",
     "availableShort": "Update available",
-    "download": "Download",
-    "downloadHint": "Download the latest DMG from GitHub Releases."
+    "download": "Install",
+    "downloadHint": "Install the signed update. Falls back to GitHub Releases if needed."
   },
   "dirty": {
     "unsaved": "Unsaved, save or discard.",

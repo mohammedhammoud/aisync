@@ -97,7 +97,7 @@ If that still does not work, remove the quarantine flag manually. Only do this f
 xattr -dr com.apple.quarantine /Applications/AISync.app
 ```
 
-The app checks the latest GitHub Release on startup and shows an in-app notification when a newer stable version is available.
+The app checks for updates on startup and can install signed Tauri updater releases in-app. If updater metadata is unavailable, the notice falls back to the GitHub Release page.
 
 ## Quick start
 
@@ -139,13 +139,15 @@ pnpm tauri build
 
 ## Release
 
-The `Release` workflow runs Release Please from Conventional Commits on `main`. It opens a release PR; merging that PR updates versions and changelog, creates the `v*.*.*` tag, then builds an unsigned universal macOS DMG.
+The `Release` workflow runs Release Please from Conventional Commits on `main`. It opens a release PR; merging that PR updates versions and changelog, creates the `aisync-v*.*.*` tag, then builds an unsigned universal macOS DMG plus Tauri updater artifacts.
 
 The same workflow can also be run manually with an existing tag to rebuild/upload the DMG.
 
 No Apple Developer Program is required for this workflow. macOS Gatekeeper may warn users on first open because the app is not signed or notarized.
 
-The release build uploads the DMG to the GitHub Release.
+The release build uploads the DMG, updater metadata, SHA256 checksums, and a detached GPG signature for the checksum file when `GPG_PRIVATE_KEY` is configured.
+
+Updater signing uses the public key in `src-tauri/tauri.conf.json`. Keep the private key outside the repo and configure `TAURI_SIGNING_PRIVATE_KEY` in GitHub Actions secrets.
 
 ## Quality checks
 
