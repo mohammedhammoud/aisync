@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest an improvement for AISync
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. Please focus on the problem first.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do that AISync does not handle well today?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Suggested solution
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives tried
+      description: Workarounds, other tools, or current manual steps.
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Are you interested in contributing this?
+      options:
+        - Yes
+        - Maybe
+        - No
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks or tradeoffs
+      description: Note filesystem safety, auth, privacy, sync conflict, or data-loss concerns.

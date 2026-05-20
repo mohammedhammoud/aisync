@@ -5,11 +5,11 @@
 <h1 align="center">AISync</h1>
 
 <p align="center">
-  A small desktop app for keeping AI coding-agent skills and instructions in sync.
+  Stop copying AI coding-agent instructions between tools by hand.
 </p>
 
 <p align="center">
-  <strong>Local-first</strong> · <strong>Optional GitHub sync</strong> · <strong>macOS</strong> · <strong>Tauri</strong> · <strong>React</strong>
+  <strong>One local source of truth</strong> · <strong>Optional private GitHub backup</strong> · <strong>macOS</strong> · <strong>Tauri</strong> · <strong>React</strong>
 </p>
 
 <p align="center">
@@ -18,9 +18,9 @@
 
 ## Overview
 
-AISync gives you one place to edit the prompts, skills, and instruction files you use across AI coding tools.
+AISync solves one problem: AI coding tools each want their own instruction and skill files, so keeping them consistent becomes manual copy-paste work.
 
-It keeps the source of truth in a local AISync folder, then syncs enabled skills and global instructions into configured tool folders with symbolic links. The default targets are Codex, Copilot, and Pi, and custom targets can be added from the app.
+AISync gives you one place to edit those prompts, skills, and instructions. It keeps the source of truth in a local AISync folder, then syncs enabled skills and global instructions into configured tool folders with symbolic links. The default targets are Codex, Copilot, and Pi, and custom targets can be added from the app.
 
 AISync is local-first by default. You can also connect GitHub to back up and sync your AISync instructions and skills through a private repository.
 
@@ -62,7 +62,7 @@ Linux and Windows adapters exist in the codebase, but they are not implemented y
 
 ## Download and install on macOS
 
-1. Open the latest GitHub Release: <https://github.com/mohammedhammoud/ai-sync/releases/latest>
+1. Open the latest GitHub Release: <https://github.com/mohammedhammoud/aisync/releases/latest>
 2. Download the `.dmg` file from the release assets.
 3. Open the DMG.
 4. Drag `AISync.app` into `Applications`.
@@ -98,6 +98,17 @@ xattr -dr com.apple.quarantine /Applications/AISync.app
 ```
 
 The app checks the latest GitHub Release on startup and shows an in-app notification when a newer stable version is available.
+
+## Quick start
+
+1. Download and install AISync.
+2. Open the app and keep the default local AISync folder, or choose another folder.
+3. Add or edit global instructions.
+4. Add reusable skills.
+5. Enable the tools you want to sync, then save.
+6. Optional: connect GitHub sync for private backup and another-machine sync.
+
+More detail: [Quick start tutorial](./docs/QUICKSTART.md).
 
 ## Development
 
@@ -165,11 +176,18 @@ pnpm storybook
 - Playwright
 - Storybook
 
+## Issues and contributions
+
+- Questions, bugs, and feature requests: [open an issue](https://github.com/mohammedhammoud/aisync/issues/new/choose).
+- Pull requests: read [CONTRIBUTING.md](./CONTRIBUTING.md).
+- Expected behavior: [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
+- Sharing notes: [docs/PROMOTION.md](./docs/PROMOTION.md).
+
 ## Contributing
 
 Issues and pull requests are welcome.
 
-Keep changes small, focused, and easy to review. Prefer simple behavior, local-first defaults, and clear file-system safety.
+Keep changes small, focused, and easy to review. Prefer simple behavior, local-first defaults, and clear file-system safety. Good first contributions include docs improvements, macOS install notes, accessibility fixes, and small UI polish.
 
 ## License
 
