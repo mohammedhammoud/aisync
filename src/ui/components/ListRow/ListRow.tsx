@@ -7,12 +7,14 @@ type ListRowProps = HTMLAttributes<HTMLDivElement> & {
   selected?: boolean;
   title: ReactNode;
   description?: ReactNode;
+  indicator?: ReactNode;
 };
 
 export function ListRow({
   className = "",
   description,
   disabled = false,
+  indicator,
   selected = false,
   title,
   ...props
@@ -49,7 +51,10 @@ export function ListRow({
       )}
       {...props}
     >
-      <strong className="text-inherit">{title}</strong>
+      <div className="flex items-center gap-2">
+        {indicator ? <span className="shrink-0">{indicator}</span> : null}
+        <strong className="min-w-0 truncate text-inherit">{title}</strong>
+      </div>
       {description ? (
         <span className="text-inherit text-xs">{description}</span>
       ) : null}

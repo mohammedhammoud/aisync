@@ -20,7 +20,8 @@
     "save": "Spara",
     "delete": "Ta bort",
     "noSkills": "Inga färdigheter hittades. Skapa en ny färdighet för att komma igång.",
-    "notFound": "Färdigheten hittades inte."
+    "notFound": "Färdigheten hittades inte.",
+    "syncBlocked": "Synk blockerad"
   },
   "configs": {
     "title": "Konfigurationer",
@@ -53,6 +54,26 @@
     "themeSystem": "System",
     "themeLight": "Ljust",
     "themeDark": "Mörkt"
+  },
+  "sync": {
+    "blocked": "Länkstatus",
+    "blockedDescription": "Granska mål som saknas eller inte ägs av AISync.",
+    "linkStatusTitle": "{{count}} länkmål behöver åtgärdas",
+    "linkStatusTitle_plural": "{{count}} länkmål behöver åtgärdas",
+    "linkStatusHint": "Granska saknade länkar och återskapa de som AISync ska hantera.",
+    "skillsNeedAttention": "{{count}} färdighet behöver åtgärdas",
+    "skillsNeedAttention_plural": "{{count}} färdigheter behöver åtgärdas",
+    "configsNeedAttention": "{{count}} konfiguration behöver åtgärdas",
+    "configsNeedAttention_plural": "{{count}} konfigurationer behöver åtgärdas",
+    "instructions": "Instruktioner",
+    "missing": "Länk saknas",
+    "targetBlocked": "Mål blockerat",
+    "details": "Detaljer",
+    "review": "Granska",
+    "fix": "Återskapa",
+    "replace": "Ersätt",
+    "replaceHeading": "Ersätt det här målet?",
+    "replaceMessage": "AISync tar backup och ersätter sökvägen med en symbolisk länk:\n{{path}}"
   },
   "github": {
     "title": "GitHub-synk",

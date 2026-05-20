@@ -44,6 +44,9 @@ export const commands = {
     }),
   deleteSkill: (skillId: string) =>
     __TAURI_INVOKE<null>("delete_skill", { skillId }),
+  getLinkStatus: () => __TAURI_INVOKE<LinkStatus[]>("get_link_status"),
+  forceLinkTarget: (target: ForceLinkTarget) =>
+    __TAURI_INVOKE<null>("force_link_target", { target }),
   readInstructions: () => __TAURI_INVOKE<string>("read_instructions"),
   writeInstructions: (content: string) =>
     __TAURI_INVOKE<null>("write_instructions", { content }),
@@ -98,6 +101,19 @@ export type GithubLoginStart = {
   interval: number;
 };
 
+export type ForceLinkTarget =
+  | {
+      kind: "skill";
+      configName: string;
+      skillId: string;
+      targetPath: string;
+    }
+  | {
+      kind: "instructions";
+      configName: string;
+      targetPath: string;
+    };
+
 export type GithubSyncStatus = {
   connected: boolean;
   repoOwner: string | null;
@@ -114,6 +130,23 @@ export type Globals = {
   setupPath: string;
   availableUpdate: AvailableUpdate | null;
 };
+
+export type LinkStatus =
+  | {
+      kind: "skill";
+      configName: string;
+      skillId: string;
+      state: LinkState;
+      targetPath: string;
+    }
+  | {
+      kind: "instructions";
+      configName: string;
+      state: LinkState;
+      targetPath: string;
+    };
+
+export type LinkState = "blocked" | "missing";
 
 export type PathErrorCode =
   | "invalid_id_length"
