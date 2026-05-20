@@ -29,6 +29,8 @@ pub fn specta_builder() -> SpectaBuilder {
             core::skills::commands::create_skill,
             core::skills::commands::update_skill,
             core::skills::commands::delete_skill,
+            core::sync::commands::get_link_status,
+            core::sync::commands::force_link_target,
             core::instructions::read_instructions,
             core::instructions::write_instructions,
             core::github::auth::commands::start_github_login,
