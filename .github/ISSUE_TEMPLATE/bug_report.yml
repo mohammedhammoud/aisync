@@ -1,0 +1,51 @@
+name: Bug report
+description: Report something broken in AISync
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please include enough detail to reproduce it.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the user-visible problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open AISync
+        2. Enable ...
+        3. Save ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AISync version
+      placeholder: 0.3.0
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: 15.2
+  - type: textarea
+    id: targets
+    attributes:
+      label: Sync targets involved
+      description: Codex, Copilot, Pi, or custom target paths. Redact private usernames or repo names if needed.
+  - type: textarea
+    id: risk
+    attributes:
+      label: Data-loss, auth, or privacy risk
+      description: Note if files were replaced, backups were missing, GitHub sync was enabled, or sensitive data appeared.
