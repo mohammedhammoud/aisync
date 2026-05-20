@@ -34,11 +34,9 @@ function LinkStatusRow({ onFix, status }: LinkStatusRowProps) {
           </Text>
           <div className="flex min-w-0 items-center gap-1">
             <Badge variant="red">
-              {t(
-                status.state === "blocked"
-                  ? "sync.targetBlocked"
-                  : "sync.missing",
-              )}
+              {status.state === "blocked"
+                ? t("sync.targetBlocked")
+                : t("sync.missing")}
             </Badge>
             <Badge>{status.configName}</Badge>
           </div>
