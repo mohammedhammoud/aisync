@@ -34,3 +34,18 @@ export const Dirty: Story = {
     isDirty: true,
   },
 };
+
+export const LinkStatus: Story = {
+  args: {
+    linkStatuses: [
+      {
+        kind: "skill",
+        configName: "Pi",
+        skillId: "audit",
+        state: "blocked",
+        targetPath: "/Users/example/.pi/agent/skills/audit",
+      },
+    ],
+    onFixLinkStatus: async () => undefined,
+  },
+};

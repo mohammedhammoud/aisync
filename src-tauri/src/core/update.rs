@@ -4,8 +4,8 @@ use serde::Deserialize;
 use specta::Type;
 
 const LATEST_RELEASE_URL: &str =
-    "https://api.github.com/repos/mohammedhammoud/ai-sync/releases/latest";
-const RELEASES_URL: &str = "https://github.com/mohammedhammoud/ai-sync/releases/latest";
+    "https://api.github.com/repos/mohammedhammoud/aisync/releases/latest";
+const RELEASES_URL: &str = "https://github.com/mohammedhammoud/aisync/releases/latest";
 
 #[derive(Clone, Debug, serde::Deserialize, serde::Serialize, Type, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]

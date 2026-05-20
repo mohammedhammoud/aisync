@@ -103,3 +103,9 @@ export const Empty: Story = {
     skills: [],
   },
 };
+
+export const LinkStatus: Story = {
+  args: {
+    linkStatusSkillIds: new Set(["audit", "refactor"]),
+  },
+};

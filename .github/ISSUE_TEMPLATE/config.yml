@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Download latest AISync release
+    url: https://github.com/mohammedhammoud/aisync/releases/latest
+    about: Install or update the macOS app.
+  - name: Quick start tutorial
+    url: https://github.com/mohammedhammoud/aisync/blob/main/docs/QUICKSTART.md
+    about: Learn the basic AISync workflow before opening a support issue.

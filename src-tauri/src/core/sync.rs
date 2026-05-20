@@ -1,6 +1,8 @@
 mod backup;
+pub mod commands;
 mod local;
 mod ownership;
+mod types;
 
 pub use local::run_sync;
 
@@ -12,6 +14,7 @@ mod tests {
     use crate::core::constants::{BACKUPS_DIR, CONFIG_FILE};
     use crate::core::skills::delete_skill_record;
     use crate::core::sync::run_sync;
+    use crate::core::sync::types::ForceLinkTarget;
     use crate::platform::platform;
     use crate::test_support::{initialize_setup, set_home, target_config, temp_root, test_lock};
 
@@ -80,6 +83,34 @@ mod tests {
         assert!(error
             .message
             .contains("Refusing to replace non-AISync target"));
+    }
+
+    #[test]
+    fn force_link_target_uses_requested_kind_when_paths_overlap() {
+        let _guard = test_lock();
+        let root = temp_root("sync-force-kind");
+        let target = temp_root("sync-force-kind-target");
+        set_home(&root);
+        let mut config = initialize_setup(root.to_string_lossy().to_string(), true, true).unwrap();
+        let mut target_config = target_config(&target);
+        target_config.instructions_path = target
+            .join("skills")
+            .join("audit")
+            .to_string_lossy()
+            .to_string();
+        config.configs = vec![target_config.clone()];
+        write_config(&config).unwrap();
+
+        super::local::force_link_target(ForceLinkTarget::Instructions {
+            config_name: target_config.name,
+            target_path: target_config.instructions_path,
+        })
+        .unwrap();
+
+        assert_eq!(
+            fs::read_link(target.join("skills").join("audit")).unwrap(),
+            root.join("instructions.md")
+        );
     }
 
     #[test]
