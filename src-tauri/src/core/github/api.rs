@@ -107,6 +107,19 @@ impl GithubClient {
         Self::parse(response)
     }
 
+    fn delete<T: for<'de> Deserialize<'de>>(
+        &self,
+        path: &str,
+        body: serde_json::Value,
+    ) -> AppResult<T> {
+        let response = self
+            .authenticated(self.client.delete(Self::api_url(path)))
+            .json(&body)
+            .send()
+            .map_err(Self::github_error)?;
+        Self::parse(response)
+    }
+
     pub fn current_user(&self) -> AppResult<GithubUser> {
         self.get("/user")
     }
@@ -224,6 +237,29 @@ impl GithubClient {
                 Self::encode_path(path)
             ),
             body,
+        )?;
+        Ok(())
+    }
+
+    pub fn delete_file(
+        &self,
+        owner: &str,
+        repo: &str,
+        path: &str,
+        sha: &str,
+        message: &str,
+    ) -> AppResult<()> {
+        let _: serde_json::Value = self.delete(
+            &format!(
+                "/repos/{}/{}/contents/{}",
+                Self::encode_segment(owner),
+                Self::encode_segment(repo),
+                Self::encode_path(path)
+            ),
+            json!({
+                "message": message,
+                "sha": sha
+            }),
         )?;
         Ok(())
     }
