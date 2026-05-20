@@ -125,8 +125,8 @@
   "updates": {
     "available": "AISync {{version}} finns tillgänglig.",
     "availableShort": "Uppdatering finns",
-    "download": "Ladda ner",
-    "downloadHint": "Ladda ner senaste DMG från GitHub Releases."
+    "download": "Installera",
+    "downloadHint": "Installerar den signerade uppdateringen. Faller tillbaka till GitHub Releases vid behov."
   },
   "dirty": {
     "unsaved": "Osparat, spara eller förkasta.",

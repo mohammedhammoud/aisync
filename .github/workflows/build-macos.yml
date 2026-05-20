@@ -6,6 +6,15 @@ on:
       tag:
         required: true
         type: string
+    secrets:
+      TAURI_SIGNING_PRIVATE_KEY:
+        required: false
+      TAURI_SIGNING_PRIVATE_KEY_PASSWORD:
+        required: false
+      GPG_PRIVATE_KEY:
+        required: false
+      GPG_PASSPHRASE:
+        required: false
   workflow_dispatch:
     inputs:
       tag:
@@ -19,6 +28,9 @@ permissions:
 jobs:
   build:
     runs-on: macos-latest
+    env:
+      HAS_TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY != '' }}
+      HAS_GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY != '' }}
 
     steps:
       - name: Checkout
@@ -55,14 +67,54 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Check updater signing key
+        if: env.HAS_TAURI_SIGNING_PRIVATE_KEY != 'true'
+        run: |
+          echo "TAURI_SIGNING_PRIVATE_KEY is required because bundle.createUpdaterArtifacts is enabled."
+          exit 1
+
       - name: Build and upload unsigned DMG
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tagName: ${{ inputs.tag }}
           releaseName: 'AISync ${{ inputs.tag }}'
-          releaseBody: 'Unsigned macOS DMG. macOS Gatekeeper may warn on first open.'
+          releaseBody: 'Unsigned macOS DMG with Tauri updater signatures. macOS Gatekeeper may warn on first open.'
           releaseDraft: false
           prerelease: false
           args: --target universal-apple-darwin
+
+      - name: Create SHA256 checksums
+        run: |
+          find src-tauri/target/universal-apple-darwin/release/bundle -type f \( -name '*.dmg' -o -name '*.tar.gz' -o -name '*.sig' -o -name 'latest.json' \) -print0 \
+            | sort -z \
+            | xargs -0 shasum -a 256 \
+            > SHASUMS256.txt
+
+      - name: Import GPG key
+        if: env.HAS_GPG_PRIVATE_KEY == 'true'
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          printf '%s' "$GPG_PRIVATE_KEY" | gpg --batch --import
+
+      - name: Sign SHA256 checksums
+        if: env.HAS_GPG_PRIVATE_KEY == 'true'
+        env:
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$GPG_PASSPHRASE" \
+            --armor --detach-sign --output SHASUMS256.txt.asc SHASUMS256.txt
+
+      - name: Upload verification assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          assets=(SHASUMS256.txt)
+          if [ -f SHASUMS256.txt.asc ]; then
+            assets+=(SHASUMS256.txt.asc)
+          fi
+          gh release upload "${{ inputs.tag }}" "${assets[@]}" --clobber

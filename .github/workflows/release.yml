@@ -67,3 +67,4 @@ jobs:
     uses: ./.github/workflows/build-macos.yml
     with:
       tag: ${{ inputs.tag || needs.release-please.outputs.tag_name }}
+    secrets: inherit

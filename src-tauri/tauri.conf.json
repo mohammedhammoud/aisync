@@ -31,10 +31,8 @@
   },
   "bundle": {
     "active": true,
-    "targets": [
-      "app",
-      "dmg"
-    ],
+    "createUpdaterArtifacts": true,
+    "targets": ["app", "dmg"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -42,5 +40,13 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU2MzhCMEY3REYyMTYzMjQKUldRa1l5SGY5N0E0Vm9tQmd3MVlEY3JHVi9UbUZ2MTh0SktUdEE4Y3NjUDFnRVR2djBnbE9wQUgK",
+      "endpoints": [
+        "https://github.com/mohammedhammoud/aisync/releases/latest/download/latest.json"
+      ]
+    }
   }
 }

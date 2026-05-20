@@ -12,6 +12,8 @@ Open the DMG, drag `AISync.app` to `Applications`, then launch it.
 
 AISync is currently unsigned. If macOS blocks the first launch, right-click `AISync.app`, choose `Open`, then confirm.
 
+After installation, AISync can install signed in-app updates when release updater metadata is available.
+
 ## 2. Choose the AISync folder
 
 By default, AISync stores its source files in:

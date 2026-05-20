@@ -31,3 +31,7 @@ uuid = { version = "1", features = ["v4", "serde"] }
 specta = { version = "2.0.0-rc.25", features = ["derive"] }
 tauri-specta = { version = "2.0.0-rc.25", features = ["javascript", "typescript"] }
 specta-typescript = "0.0.12"
+tauri-plugin-process = "2"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-updater = "2"

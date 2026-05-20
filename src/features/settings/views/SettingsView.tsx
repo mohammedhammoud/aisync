@@ -1,5 +1,7 @@
 import { createLazyRoute } from "@tanstack/react-router";
 import { openUrl } from "@tauri-apps/plugin-opener";
+import { relaunch } from "@tauri-apps/plugin-process";
+import { check } from "@tauri-apps/plugin-updater";
 import { useLanguage } from "@/base/i18n/hooks/useLanguage";
 import { useGlobalsStore } from "@/base/store/globalsStore";
 import { useTheme } from "@/ui/theme/useTheme";
@@ -16,11 +18,26 @@ function SettingsView() {
   const { changeLanguage, language } = useLanguage();
   const { colorScheme, setColorScheme } = useTheme();
 
+  async function installUpdate(downloadUrl: string) {
+    try {
+      const update = await check();
+      if (!update) {
+        await openUrl(downloadUrl);
+        return;
+      }
+
+      await update.downloadAndInstall();
+      await relaunch();
+    } catch {
+      await openUrl(downloadUrl);
+    }
+  }
+
   return (
     <div className="flex h-full flex-col gap-4 overflow-hidden">
       {availableUpdate ? (
         <UpdateNotice
-          onDownload={() => void openUrl(availableUpdate.downloadUrl)}
+          onDownload={() => void installUpdate(availableUpdate.downloadUrl)}
           version={availableUpdate.version}
         />
       ) : null}
