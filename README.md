@@ -24,6 +24,14 @@ AISync gives you one place to edit those prompts, skills, and instructions. It k
 
 AISync is local-first by default. You can also connect GitHub to back up and sync your AISync instructions and skills through a private repository.
 
+## Why I built it
+
+I use AI coding tools on more than one computer and wanted the same skills and instructions everywhere. This started as a simple repo that I cloned onto each machine and synced with a Bash script, but the copies kept drifting out of sync.
+
+AISync turns that manual setup into a small local app: one source of truth, symlinked into each tool, with optional GitHub sync so another machine can pull the same configuration.
+
+Note: the Rust/Tauri backend was generated with AI assistance and reviewed by me. I am not a Rust expert, so security-sensitive or platform-specific changes should get extra review.
+
 ## Features
 
 - Manage reusable AI-agent skills.
