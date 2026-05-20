@@ -30,7 +30,9 @@ pub fn push_all(client: &GithubClient, settings: &GithubRepoSettings) -> AppResu
             continue;
         }
         let path = remote_path(path);
-        if let Some((_content, sha)) = client.read_file(&settings.repo_owner, &settings.repo_name, &path)? {
+        if let Some((_content, sha)) =
+            client.read_file(&settings.repo_owner, &settings.repo_name, &path)?
+        {
             deleted_files.push((path, sha));
         }
     }
