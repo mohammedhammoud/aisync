@@ -34,9 +34,9 @@ fn token_entry() -> AppResult<keyring::Entry> {
 }
 
 pub fn save_token(token: &str) -> AppResult<()> {
-    token_entry()?
-        .set_password(token)
-        .map_err(|_error| AppError::new(GithubErrorCode::KeychainFailed, "Keychain access failed"))?;
+    token_entry()?.set_password(token).map_err(|_error| {
+        AppError::new(GithubErrorCode::KeychainFailed, "Keychain access failed")
+    })?;
     cache_token(Some(token.to_string()))
 }
 
