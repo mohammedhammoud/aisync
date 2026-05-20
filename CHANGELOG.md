@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/mohammedhammoud/aisync/compare/aisync-v0.4.0...aisync-v0.5.0) (2026-05-20)
+
+
+### Features
+
+* add tauri updater releases and signed update flow ([#13](https://github.com/mohammedhammoud/aisync/issues/13)) ([5a94850](https://github.com/mohammedhammoud/aisync/commit/5a948501de958a3b60e56b2751e6a1d79dd47b9f))
+
 ## [0.4.0](https://github.com/mohammedhammoud/aisync/compare/aisync-v0.3.0...aisync-v0.4.0) (2026-05-20)
 
 
