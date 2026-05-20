@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0](https://github.com/mohammedhammoud/aisync/compare/aisync-v0.3.0...aisync-v0.4.0) (2026-05-20)
+
+
+### Features
+
+* **github:** add in-memory token cache for keychain reads and writes ([#11](https://github.com/mohammedhammoud/aisync/issues/11)) ([8b7c713](https://github.com/mohammedhammoud/aisync/commit/8b7c71361133d3c73c4cf9d3f8cf71825ee1bae2))
+* **sync:** add link status repair flow ([#7](https://github.com/mohammedhammoud/aisync/issues/7)) ([100c547](https://github.com/mohammedhammoud/aisync/commit/100c547b74426e031a7fec8f750900cebb0509c4))
+
+
+### Bug Fixes
+
+* **github:** sync deletes and release urls ([#10](https://github.com/mohammedhammoud/aisync/issues/10)) ([7bdbd33](https://github.com/mohammedhammoud/aisync/commit/7bdbd332d23a4a9237ab2bdb4bb5ee04275da9ed))
+* prioritize sync badge over update badge ([480922b](https://github.com/mohammedhammoud/aisync/commit/480922b15840fa88cc4452ec3d5473f9142bf792))
+* reduce update check timeout ([5e1c9dd](https://github.com/mohammedhammoud/aisync/commit/5e1c9dd6ca9521e1b10a0b101afba6fd95eabe66))
+* **skills:** navigate to created skill after save ([b32cf1a](https://github.com/mohammedhammoud/aisync/commit/b32cf1abd43fabb08860e9cbaf92ee80ff777bb8))
+
 ## [0.3.0](https://github.com/mohammedhammoud/ai-sync/compare/aisync-v0.2.3...aisync-v0.3.0) (2026-05-18)
 
 
